@@ -7,9 +7,9 @@ stages:
 build:
     stage: build
     script:
-        - "dotnet build **/*.csproj"
+        - "dotnet build src/KP.BackEnd.sln"
 
 test:
     stage: test
     script: 
-        - "dotnet test **/*[Ttests]/*.csproj"
+        - "dotnet test src/KP.BackEnd.Tests/KP.BackEnd.Tests.csproj"
