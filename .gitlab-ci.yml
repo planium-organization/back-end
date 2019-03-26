@@ -8,11 +8,8 @@ build:
     stage: build
     script:
         - "dotnet build **/*.csproj"
-    artifacts:
-      paths:
-        - bin/
 
 test:
     stage: test
     script: 
-        - "dotnet test"
+        - "dotnet test **/*Tests.csproj"
