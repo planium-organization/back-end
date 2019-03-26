@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using KP.Models;
+using KP.BackEnd.Models;
 
-namespace KP.Controllers
+namespace KP.BackEnd.Controllers
 {
     public class HomeController : Controller
     {

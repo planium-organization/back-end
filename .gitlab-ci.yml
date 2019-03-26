@@ -12,4 +12,4 @@ build:
 test:
     stage: test
     script: 
-        - "dotnet test **/*Tests.csproj"
+        - "dotnet test **/*[Ttests]/*.csproj"

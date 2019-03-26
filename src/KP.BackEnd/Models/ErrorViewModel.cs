@@ -1,6 +1,6 @@
 using System;
 
-namespace KP.Models
+namespace KP.BackEnd.Models
 {
     public class ErrorViewModel
     {
