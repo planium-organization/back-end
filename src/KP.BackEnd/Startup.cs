@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using KP.BackEnd.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace KP.BackEnd
 {
@@ -28,21 +29,55 @@ namespace KP.BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.Configure<IdentityOptions>(options =>
+            {
+                //TODO
+                //Lax requirements because this is a demo
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;                
+            });
+
+            services.ConfigureApplicationCookie(cookieOptions =>
+            {
+                cookieOptions.Cookie.SameSite = SameSiteMode.None; 
+                cookieOptions.Cookie.Name = "auth_cookie";            
+
+                cookieOptions.Events = new CookieAuthenticationEvents
+                {
+                    OnRedirectToLogin = redirectContext =>
+                    {
+                        redirectContext.HttpContext.Response.StatusCode = 401;
+                        return Task.CompletedTask;
+                    }                
+                };
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
+            services.AddMvc(options => {
+                options.Filters.Add(new ValidateAntiForgeryTokenAttribute());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAntiforgery(antiforgeryOptions => {
+                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,23 +90,15 @@ namespace KP.BackEnd
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //TODO
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
+
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
             app.UseAuthentication();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }
