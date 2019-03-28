@@ -1,6 +1,6 @@
-namespace KP.BackEnd.Models
+namespace KP.BackEnd.DTOs
 {
-    public class LoginRequest
+    public class RegisterDto
     {
         public string Email { get; set; }
         public string Password { get; set; }

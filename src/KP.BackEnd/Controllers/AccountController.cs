@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using KP.BackEnd.Models;
+using KP.BackEnd.DTOs;
 
 namespace KP.BackEnd.Controllers
 {
@@ -19,14 +19,14 @@ namespace KP.BackEnd.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> Register(RegisterRequest registerRequest)
+        public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            var newUser = new IdentityUser(registerRequest.Email)
+            var newUser = new IdentityUser(registerDto.Email)
             {
-                Email = registerRequest.Email
+                Email = registerDto.Email
             };
 
-            var creationResult = await _userManager.CreateAsync(newUser, registerRequest.Password);
+            var creationResult = await _userManager.CreateAsync(newUser, registerDto.Password);
 
             if (!creationResult.Succeeded)
             {
@@ -38,13 +38,13 @@ namespace KP.BackEnd.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+            var user = await _userManager.FindByEmailAsync(loginDto.Email);
             if (user == null)
                 return BadRequest("Login failed");
 
-            var signInResult = await _signInManager.PasswordSignInAsync(user, loginRequest.Password, isPersistent: true, lockoutOnFailure: false); //lockout on failure is off because this is a demo
+            var signInResult = await _signInManager.PasswordSignInAsync(user, loginDto.Password, isPersistent: true, lockoutOnFailure: false); //lockout on failure is off because this is a demo
 
             if (!signInResult.Succeeded)
                 return BadRequest("Login failed");
