@@ -7,12 +7,9 @@ stages:
 build:
     stage: build
     script:
-        - "dotnet build"
-    artifacts:
-      paths:
-        - bin/
+        - "dotnet build src/KP.BackEnd.sln"
 
 test:
     stage: test
     script: 
-        - "dotnet test"
+        - "dotnet test src/KP.BackEnd.Tests/KP.BackEnd.Tests.csproj"
