@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2018.3/system/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/.Rider2018.3/system/resharper-host/temp/ReSharperHost/v183/TempCaches/Solution.KP.BackEnd.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.Rider2018.3/system/resharper-host/local/Transient/ReSharperHost/v183/SolutionCaches/_KP.BackEnd.937170669.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.3.2/build/_common/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.3.2/build/_common/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/mstest.testadapter/1.3.2/build/netcoreapp1.0/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="KP.BackEnd" t="IncludeRecursive">
+        <e p="Controllers" t="Include">
+          <e p="AccountController.cs" t="Include" />
+          <e p="AntiForgeryController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
+        </e>
+        <e p="DTOs" t="Include">
+          <e p="LoginDto.cs" t="Include" />
+          <e p="RegisterDto.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="ApplicationDbContext.cs" t="Include" />
+          <e p="Migrations" t="Include">
+            <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
+            <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
+            <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+          </e>
+        </e>
+        <e p="KP.BackEnd.csproj" t="IncludeRecursive" />
+        <e p="Models" t="Include">
+          <e p="ApplicationRole.cs" t="Include" />
+          <e p="ApplicationUser.cs" t="Include" />
+          <e p="ErrorViewModel.cs" t="Include" />
+          <e p="Student.cs" t="Include" />
+          <e p="Supervisor.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="KP.BackEnd.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="KP.BackEnd.Tests" t="IncludeRecursive">
+        <e p="KP.BackEnd.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.2" t="Include">
+              <e p="KP.BackEnd.Tests.AssemblyInfo.cs" t="Include" />
+              <e p="KP.BackEnd.Tests.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="KP.BackEnd.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
 </project>
