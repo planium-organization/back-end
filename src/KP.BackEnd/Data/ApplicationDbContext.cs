@@ -68,10 +68,46 @@ namespace KP.BackEnd.Data
                     }
                 });
             });
+            
+            builder.Entity<Card>(card =>
+            {
+                card.HasData(new Card[]
+                {
+                    new Card
+                    {
+                        Description = "salaam",
+                        Id = new Guid("cccc1111-1111-1111-1111-111111111111"),
+                        DueDate = DateTime.Parse("2018-11-11"),
+                        Duration   =  new TimeSpan(1,11,11),
+                        IsDone = false,
+                        IsExpired = false,
+                        IsEditable = false,
+                        StartTime = null,
+                        SupervisorCreated = true,
+                        Type = CardType.Todo
+                    },
+                    new Card
+                    {
+                        Description = "yahaha",
+                        Id = new Guid("cccc1111-1111-1111-1111-111111111112"),
+                        DueDate = DateTime.Parse("2018-11-12"),
+                        Duration   =  new TimeSpan(2,11,11),
+                        IsDone = false,
+                        IsExpired = false,
+                        IsEditable = false,
+                        StartTime = null,
+                        SupervisorCreated = true,
+                        Type = CardType.Burned
+                    }
+                    
+                });
+            });
+            
         }
         
         public DbSet<Student> Students { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Card> Cards { get; set; }
     }
 }

@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52dddcbd-728d-48c4-8a68-01e481b2c518" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/KP.BackEnd/Controllers/PostController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/KP.BackEnd/Models/Post.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KP.BackEnd/Models/Card.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KP.BackEnd/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KP.BackEnd/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KP.BackEnd/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KP.BackEnd/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KP.BackEnd/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KP.BackEnd/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KP.BackEnd/Models/Student.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KP.BackEnd/Models/Student.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KP.BackEnd/Models/Supervisor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KP.BackEnd/Models/Supervisor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/KP.BackEnd/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/KP.BackEnd/Startup.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/PostController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+            <state relative-caret-position="252">
+              <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
               <folding>
                 <marker date="1557232116496" expanded="false" signature="6:226" ph="..." />
                 <marker date="1557232116496" expanded="true" signature="297:889" ph="{...}" />
@@ -108,46 +105,44 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
+            <state relative-caret-position="40">
+              <caret line="79" column="60" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="60" />
               <folding>
-                <marker date="1557235461109" expanded="false" signature="6:222" ph="..." />
-                <marker date="1557235461109" expanded="true" signature="249:2874" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="349:2872" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="467:500" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="571:2698" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="673:942" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="735:928" ph="/* student.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
-                <marker date="1557235461109" expanded="true" signature="1011:1547" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="1076:1275" ph="/* supervisor.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
-                <marker date="1557235461109" expanded="true" signature="1362:1531" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="1415:1512" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="1591:2686" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="1662:2670" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="1713:2162" ph="{...}" />
-                <marker date="1557235461109" expanded="true" signature="2213:2652" ph="{...}" />
+                <marker date="1557242121135" expanded="false" signature="6:222" ph="..." />
+                <marker date="1557242121135" expanded="true" signature="249:4298" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="349:4296" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="467:500" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="571:4075" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="673:942" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="735:928" ph="/* student.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
+                <marker date="1557242121135" expanded="true" signature="1011:1547" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="1076:1275" ph="/* supervisor.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
+                <marker date="1557242121135" expanded="true" signature="1362:1531" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="1415:1512" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="1591:2686" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="1662:2670" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="1713:2162" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="2213:2652" ph="{...}" />
+                <marker date="1557242121135" expanded="true" signature="3454:3995" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KP.BackEnd/Migrations/20190507132428_post.cs">
+        <entry file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-865">
-              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+            <state relative-caret-position="339">
+              <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
               <folding>
-                <marker date="1557235468791" expanded="false" signature="6:61" ph="..." />
-                <marker date="1557235468791" expanded="true" signature="94:3630" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="138:3628" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="214:2657" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="626:988" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="1027:1446" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="1854:2482" ph="{...}" />
-                <marker date="1557235468791" expanded="true" signature="2730:3622" ph="{...}" />
+                <marker date="1557241367159" expanded="true" signature="6:221" ph="..." />
+                <marker date="1557241367159" expanded="true" signature="255:889" ph="{...}" />
+                <marker date="1557241367159" expanded="true" signature="373:887" ph="{...}" />
+                <marker date="1557241367159" expanded="true" signature="496:548" ph="{...}" />
+                <marker date="1557241367159" expanded="true" signature="689:872" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -166,11 +161,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KP.BackEnd/Startup.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
+            <state relative-caret-position="625">
+              <caret line="79" column="41" lean-forward="true" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
               <folding>
                 <marker date="1557236369435" expanded="false" signature="6:576" ph="..." />
                 <marker date="1557236369435" expanded="true" signature="598:4020" ph="{...}" />
@@ -189,6 +184,19 @@
                 <marker date="1557236369435" expanded="true" signature="3595:4012" ph="{...}" />
                 <marker date="1557236369435" expanded="true" signature="3642:3763" ph="{...}" />
                 <marker date="1557236369435" expanded="true" signature="3780:3862" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KP.BackEnd/Models/Card.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+              <folding>
+                <marker date="1557241974943" expanded="true" signature="42:639" ph="{...}" />
+                <marker date="1557241974943" expanded="true" signature="66:530" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -236,17 +244,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/Student.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/Card.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/Supervisor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/ErrorViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/DTOs/RegisterDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/DTOs/LoginDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5BEF0119-3538-44C0-B65A-C60D6E1DCCFE/d4/33930e86/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Migrations/20190502091425_student.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/Student.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/KP.BackEnd/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Models/Post.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/PostController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/AccountController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -269,15 +279,17 @@
         <option value="$PROJECT_DIR$/KP.BackEnd/Models/Supervisor.cs" />
         <option value="$PROJECT_DIR$/KP.BackEnd/Models/Student.cs" />
         <option value="$PROJECT_DIR$/KP.BackEnd/Controllers/UserController.cs" />
-        <option value="$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs" />
         <option value="$PROJECT_DIR$/KP.BackEnd/Startup.cs" />
+        <option value="$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs" />
+        <option value="$PROJECT_DIR$/KP.BackEnd/Models/Card.cs" />
+        <option value="$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="-16" />
-    <option name="width" value="3840" />
-    <option name="height" value="2112" />
+    <option name="y" value="-20" />
+    <option name="width" value="1944" />
+    <option name="height" value="1104" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -331,7 +343,13 @@
               <item name="Project" type="161ac34:FileSystemExplorerRootNode" />
               <item name="src" type="34e6ba20:FileSystemExplorerNode" />
               <item name="KP.BackEnd" type="34e6ba20:FileSystemExplorerNode" />
-              <item name="Migrations" type="34e6ba20:FileSystemExplorerNode" />
+              <item name="Controllers" type="34e6ba20:FileSystemExplorerNode" />
+            </path>
+            <path>
+              <item name="Project" type="161ac34:FileSystemExplorerRootNode" />
+              <item name="src" type="34e6ba20:FileSystemExplorerNode" />
+              <item name="KP.BackEnd" type="34e6ba20:FileSystemExplorerNode" />
+              <item name="Data" type="34e6ba20:FileSystemExplorerNode" />
             </path>
             <path>
               <item name="Project" type="161ac34:FileSystemExplorerRootNode" />
@@ -396,7 +414,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23025000" />
+    <option name="totallyTimeSpent" value="29173000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -409,16 +427,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.25637585" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" sideWeight="0.50166667" side_tool="true" weight="0.25637585" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Build" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -427,7 +447,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Unit Tests" order="11" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.21529745" />
+      <window_info anchor="bottom" id="Terminal" order="12" visible="true" weight="0.21529745" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
       <window_info anchor="bottom" id="REST Client" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -450,6 +470,19 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs</url>
+          <line>29</line>
+          <properties documentPath="$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs" initialLine="29">
+            <startOffsets>
+              <option value="845" />
+            </startOffsets>
+            <endOffsets>
+              <option value="862" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -560,13 +593,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="860">
           <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KP.BackEnd/appsettings.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="2" column="88" selection-start-line="2" selection-start-column="88" selection-end-line="2" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -741,30 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="62" column="43" selection-start-line="62" selection-start-column="43" selection-end-line="62" selection-end-column="43" />
-          <folding>
-            <marker date="1557235461109" expanded="false" signature="6:222" ph="..." />
-            <marker date="1557235461109" expanded="true" signature="249:2874" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="349:2872" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="467:500" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="571:2698" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="673:942" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="735:928" ph="/* student.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
-            <marker date="1557235461109" expanded="true" signature="1011:1547" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="1076:1275" ph="/* supervisor.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
-            <marker date="1557235461109" expanded="true" signature="1362:1531" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="1415:1512" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="1591:2686" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="1662:2670" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="1713:2162" ph="{...}" />
-            <marker date="1557235461109" expanded="true" signature="2213:2652" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/KP.BackEnd/Migrations/20190507132428_post.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-865">
@@ -782,24 +784,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/PostController.cs">
+    <entry file="file://$PROJECT_DIR$/KP.BackEnd/appsettings.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
-          <folding>
-            <marker date="1557232116496" expanded="false" signature="6:226" ph="..." />
-            <marker date="1557232116496" expanded="true" signature="297:889" ph="{...}" />
-            <marker date="1557232116496" expanded="true" signature="416:887" ph="{...}" />
-            <marker date="1557232116496" expanded="true" signature="539:591" ph="{...}" />
-            <marker date="1557232116496" expanded="true" signature="727:881" ph="{...}" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KP.BackEnd/Startup.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
+        <state relative-caret-position="625">
+          <caret line="79" column="41" lean-forward="true" selection-start-line="79" selection-start-column="41" selection-end-line="79" selection-end-column="41" />
           <folding>
             <marker date="1557236369435" expanded="false" signature="6:576" ph="..." />
             <marker date="1557236369435" expanded="true" signature="598:4020" ph="{...}" />
@@ -818,6 +813,70 @@
             <marker date="1557236369435" expanded="true" signature="3595:4012" ph="{...}" />
             <marker date="1557236369435" expanded="true" signature="3642:3763" ph="{...}" />
             <marker date="1557236369435" expanded="true" signature="3780:3862" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/PostController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding>
+            <marker date="1557232116496" expanded="false" signature="6:226" ph="..." />
+            <marker date="1557232116496" expanded="true" signature="297:889" ph="{...}" />
+            <marker date="1557232116496" expanded="true" signature="416:887" ph="{...}" />
+            <marker date="1557232116496" expanded="true" signature="539:591" ph="{...}" />
+            <marker date="1557232116496" expanded="true" signature="727:881" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Models/Card.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <folding>
+            <marker date="1557241974943" expanded="true" signature="42:639" ph="{...}" />
+            <marker date="1557241974943" expanded="true" signature="66:530" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Controllers/CardController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding>
+            <marker date="1557241367159" expanded="true" signature="6:221" ph="..." />
+            <marker date="1557241367159" expanded="true" signature="255:889" ph="{...}" />
+            <marker date="1557241367159" expanded="true" signature="373:887" ph="{...}" />
+            <marker date="1557241367159" expanded="true" signature="496:548" ph="{...}" />
+            <marker date="1557241367159" expanded="true" signature="689:872" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KP.BackEnd/Data/ApplicationDbContext.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="79" column="60" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="60" />
+          <folding>
+            <marker date="1557242121135" expanded="false" signature="6:222" ph="..." />
+            <marker date="1557242121135" expanded="true" signature="249:4298" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="349:4296" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="467:500" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="571:4075" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="673:942" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="735:928" ph="/* student.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
+            <marker date="1557242121135" expanded="true" signature="1011:1547" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="1076:1275" ph="/* supervisor.HasOne&lt;ApplicationUser&gt;(s =&gt; s.Identity) ... */" />
+            <marker date="1557242121135" expanded="true" signature="1362:1531" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="1415:1512" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="1591:2686" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="1662:2670" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="1713:2162" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="2213:2652" ph="{...}" />
+            <marker date="1557242121135" expanded="true" signature="3454:3995" ph="{...}" />
           </folding>
         </state>
       </provider>

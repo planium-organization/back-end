@@ -14,6 +14,7 @@
         <e p="Controllers" t="Include">
           <e p="AccountController.cs" t="Include" />
           <e p="AntiForgeryController.cs" t="Include" />
+          <e p="CardController.cs" t="Include" />
           <e p="PostController.cs" t="Include" />
           <e p="UserController.cs" t="Include" />
         </e>
@@ -31,11 +32,14 @@
           <e p="20190502091425_student.Designer.cs" t="Include" />
           <e p="20190507132428_post.cs" t="Include" />
           <e p="20190507132428_post.Designer.cs" t="Include" />
+          <e p="20190507151610_cards.cs" t="Include" />
+          <e p="20190507151610_cards.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="ApplicationRole.cs" t="Include" />
           <e p="ApplicationUser.cs" t="Include" />
+          <e p="Card.cs" t="Include" />
           <e p="ErrorViewModel.cs" t="Include" />
           <e p="Post.cs" t="Include" />
           <e p="Student.cs" t="Include" />
