@@ -80,13 +80,13 @@ namespace KP.BackEnd
                     .AllowCredentials());
             });
 
-            services.AddMvc(options => {
+            services.AddMvc()/*options => {
                 options.Filters.Add(new ValidateAntiForgeryTokenAttribute());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            })*/.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAntiforgery(antiforgeryOptions => {
-                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
-            });
+//            services.AddAntiforgery(antiforgeryOptions => {
+//                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
+//            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,7 +103,7 @@ namespace KP.BackEnd
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
+//            app.UseCors("CorsPolicy");
 
             app.UseStaticFiles();
             app.UseAuthentication();
