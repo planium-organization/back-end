@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using KP.BackEnd.Persistence.Repositories;
+using KP.BackEnd.Core.Repositories;
 
 namespace KP.BackEnd
 {
@@ -81,6 +83,7 @@ namespace KP.BackEnd
 
             // DI Configurations
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICardRepository, CardRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
