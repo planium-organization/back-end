@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KP.BackEnd.Data;
+using KP.BackEnd.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -29,10 +30,18 @@ namespace KP.BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
+//            services.AddDbContext<ApplicationDbContext>(options =>
+//                options.UseSqlite(
+//                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<ApplicationDbContext>(options => 
+                    options.UseNpgsql(
+                        Configuration.GetConnectionString("DefaultConnection")
+                    )
+                ).BuildServiceProvider();
+            
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.Configure<IdentityOptions>(options =>
@@ -71,13 +80,13 @@ namespace KP.BackEnd
                     .AllowCredentials());
             });
 
-            services.AddMvc(options => {
+            services.AddMvc()/*options => {
                 options.Filters.Add(new ValidateAntiForgeryTokenAttribute());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            })*/.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAntiforgery(antiforgeryOptions => {
-                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
-            });
+//            services.AddAntiforgery(antiforgeryOptions => {
+//                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
+//            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,7 +103,7 @@ namespace KP.BackEnd
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
+//            app.UseCors("CorsPolicy");
 
             app.UseStaticFiles();
             app.UseAuthentication();
