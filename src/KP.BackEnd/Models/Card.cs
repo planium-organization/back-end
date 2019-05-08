@@ -12,7 +12,7 @@ namespace KP.BackEnd.Models
         public CardType Type { get; set; }
         public bool IsDone { get; set; }
         public bool IsExpired { get; set; }
-        public bool IsEditable { get; set; }
+//        public bool IsEditable { get; set; }
         public bool SupervisorCreated { get; set; } 
     }
     

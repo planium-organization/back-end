@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Data;
+using KP.BackEnd.DTOs;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,28 @@ namespace KP.BackEnd.Controllers
             
             return Ok(cards);
         }
-        
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] CardDto cardDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var card= new Card
+            {
+                Description = cardDto.Description,
+                DueDate = cardDto.DueDate,
+                Duration = cardDto.Duration,
+                SupervisorCreated =  false,
+                Type= CardType.Todo
+            };
+                
+            await _context.Cards.AddAsync(card);
+            await _context.SaveChangesAsync();
+                
+            return Ok();
+        }
+
     }
 }
