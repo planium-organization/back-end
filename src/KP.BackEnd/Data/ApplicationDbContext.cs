@@ -56,7 +56,7 @@ namespace KP.BackEnd.Data
                         CreationTime = DateTime.Parse("2018-11-11T11:11:11"),
                         SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
                         Text = "hello",
-                        ImageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs"
+                        ImageUrl= Encoding.UTF8.GetBytes("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs")
                     },
                     new Post
                     {
@@ -64,7 +64,7 @@ namespace KP.BackEnd.Data
                         CreationTime = DateTime.Parse("2018-11-11T11:11:12"),
                         SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
                         Text = "yoohahah",
-                        ImageUrl="https://profilepicturesdp.com/wp-content/uploads/2018/07/picture-for-profile-facebook-3.jpg"
+                        ImageUrl= Encoding.UTF8.GetBytes("https://profilepicturesdp.com/wp-content/uploads/2018/07/picture-for-profile-facebook-3.jpg")
                     }
                 });
             });
@@ -81,7 +81,6 @@ namespace KP.BackEnd.Data
                         Duration   =  new TimeSpan(1,11,11),
                         IsDone = false,
                         IsExpired = false,
-                        IsEditable = false,
                         StartTime = null,
                         SupervisorCreated = true,
                         Type = CardType.Todo
@@ -94,7 +93,6 @@ namespace KP.BackEnd.Data
                         Duration   =  new TimeSpan(2,11,11),
                         IsDone = false,
                         IsExpired = false,
-                        IsEditable = false,
                         StartTime = null,
                         SupervisorCreated = true,
                         Type = CardType.Burned

@@ -12,12 +12,10 @@ namespace KP.BackEnd.Models
         
         public string Text { get; set; }
         
-        public string ImageUrl { get; set; }
+        public byte[] ImageUrl { get; set; }
         
         [Required]
         public Supervisor Creator { get; set; }
         public Guid SupervisorId { get; set; }
-        
-       
     }
 }

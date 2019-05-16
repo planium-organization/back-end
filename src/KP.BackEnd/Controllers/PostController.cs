@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using KP.BackEnd.Data;
+using KP.BackEnd.DTOs;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +31,27 @@ namespace KP.BackEnd.Controllers
             var posts = await _context.Posts.Skip(page * count).Take(count).ToListAsync();
             
             return Ok(posts);
+        }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] PostDto postDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            var post= new Post()
+            {
+                ImageUrl = postDto.ImageUrl,
+                Text = postDto.Text,
+                CreationTime = DateTime.Now,
+               Creator = _context.Supervisors.First() //TODO
+            };
+                
+            await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
+                
+            return Ok();
         }
     }
 }

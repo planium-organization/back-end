@@ -8,5 +8,6 @@ namespace KP.BackEnd.DTOs
         public TimeSpan Duration { get; set; }
         public DateTime DueDate { get; set; }
         public string Description{ get; set; } 
+        public CardType Type { get; set; }
     }
 }
