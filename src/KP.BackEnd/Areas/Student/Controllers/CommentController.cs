@@ -1,15 +1,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Data;
-using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace KP.BackEnd.Controllers
+namespace KP.BackEnd.Areas.Student.Controllers
 {
-    [Authorize]
-    [Route("api/[controller]")]
+//    [Authorize]
+    [Area("Student")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -20,7 +19,6 @@ namespace KP.BackEnd.Controllers
             _context = context;
         }
         
-        [AllowAnonymous]
         [HttpGet("{page}/{count}")]
         public async Task<ActionResult<Comment>> GetAll(int page, int count)
         {

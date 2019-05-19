@@ -43,7 +43,7 @@ namespace KP.BackEnd.Migrations
 
             migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "CreationTime", "ImageUrl", "SupervisorId", "Text" },
+                columns: new[] { "Id", "CreationTime", "Image", "CreatorId", "Text" },
                 values: new object[,]
                 {
                     { new Guid("aaaa1111-1111-1111-1111-111111111111"), new DateTime(2018, 11, 11, 11, 11, 11, 0, DateTimeKind.Unspecified), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs", new Guid("bbbb1111-1111-1111-1111-111111111111"), "hello" },
@@ -53,7 +53,7 @@ namespace KP.BackEnd.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_SupervisorId",
                 table: "Posts",
-                column: "SupervisorId");
+                column: "CreatorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

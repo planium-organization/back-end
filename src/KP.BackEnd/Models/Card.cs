@@ -9,18 +9,16 @@ namespace KP.BackEnd.Models
         public DateTime? StartTime { get; set; }
         public DateTime DueDate { get; set; }
         public string Description{ get; set; }
-        public CardType Type { get; set; }
-        public bool IsDone { get; set; }
-        public bool IsExpired { get; set; }
+        public CardStatus Status { get; set; }
+        public Guid CreatorId { get; set; }
+//        public bool IsExpired { get; set; } calculated property
 //        public bool IsEditable { get; set; }
-        public bool SupervisorCreated { get; set; } 
+//        public bool SupervisorCreated { get; set; } look up db
     }
     
-    public enum  CardType
+    public enum  CardStatus
     {
         Todo,
-        Burned,
-        Expired,
-        Backward
+        Done
     }
 }

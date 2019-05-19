@@ -2,13 +2,12 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Data;
-using KP.BackEnd.DTOs;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace KP.BackEnd.Controllers
+namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -53,7 +52,7 @@ namespace KP.BackEnd.Controllers
                 DueDate = cardDto.DueDate,
                 Duration = cardDto.Duration,
                 SupervisorCreated =  false,
-                Type = CardType.Todo
+                Status = CardStatus.Todo
             };
                 
             await _context.Cards.AddAsync(card);
@@ -73,7 +72,7 @@ namespace KP.BackEnd.Controllers
             if (card == null)
                 return NotFound("Card id is not valid");
 
-            card.Type = cardDto.Type;
+            card.Status = cardDto.Type;
 
             await _context.SaveChangesAsync();
             

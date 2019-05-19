@@ -4,7 +4,7 @@ using System.Net.Mime;
 
 namespace KP.BackEnd.Models
 {
-    public class Post
+    public class ChannelPost
     {
         public Guid Id { get; set; }
         
@@ -12,10 +12,10 @@ namespace KP.BackEnd.Models
         
         public string Text { get; set; }
         
-        public byte[] ImageUrl { get; set; }
+        public byte[] Image { get; set; }
         
         [Required]
         public Supervisor Creator { get; set; }
-        public Guid SupervisorId { get; set; }
+        public Guid CreatorId { get; set; }
     }
 }

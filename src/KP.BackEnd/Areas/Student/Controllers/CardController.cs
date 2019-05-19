@@ -1,0 +1,84 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using KP.BackEnd.Areas.Student.DTOs;
+using KP.BackEnd.Areas.Student.DTOs.Card;
+using KP.BackEnd.Data;
+using KP.BackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace KP.BackEnd.Areas.Student.Controllers
+{
+//    [Authorize]
+    [Area("Student")]
+    [ApiController]
+    public class CardController :ControllerBase
+    {
+        private readonly ApplicationDbContext _context;
+
+        public CardController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("{date}/{range}")]
+        public async Task<ActionResult<CardGetDto>> GetAll(DateTime date, int range)
+        {
+            var userId = Guid.Parse(User.Identity.Name);
+            var cards = await _context.Cards
+                .Where(x => x.CreatorId == userId && x.DueDate.Date.Subtract(date.Date).Days < range)
+                .ToListAsync();
+
+            var cardDtos = cards.Select(c => new CardGetDto(c, userId));
+            
+            return Ok(cardDtos);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CardGetDto>> Get(Guid id)
+        {
+            var userId = Guid.Parse(User.Identity.Name);
+            var card = await _context.Cards.Where(c => c.CreatorId == userId && c.Id == id).FirstOrDefaultAsync();
+            if (card == null)
+                return NotFound("card not found");
+            
+            var cardDto = new CardGetDto(card, userId);
+            return Ok(cardDto);
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] CardCreateDto cardDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var userId = Guid.Parse(User.Identity.Name);
+            var card = cardDto.ToCard(userId);
+                
+            await _context.Cards.AddAsync(card);
+            await _context.SaveChangesAsync();
+                
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Edit(Guid id, [FromBody] CardGetDto cardGetDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var card = _context.Cards.Find(id);
+            if (card == null)
+                return NotFound("Card id is not valid");
+
+            card.Status = cardGetDto.Type;
+
+            await _context.SaveChangesAsync();
+            
+            return Ok();
+        }
+        
+    }
+}

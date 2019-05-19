@@ -46,25 +46,25 @@ namespace KP.BackEnd.Data
                 });
             });
 
-            builder.Entity<Post>(post =>
+            builder.Entity<ChannelPost>(post =>
             {
-                post.HasData(new Post[]
+                post.HasData(new ChannelPost[]
                 {
-                    new Post
+                    new ChannelPost
                     {
                         Id = new Guid("aaaa1111-1111-1111-1111-111111111111"),
                         CreationTime = DateTime.Parse("2018-11-11T11:11:11"),
-                        SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
+                        CreatorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
                         Text = "hello",
-                        ImageUrl= Encoding.UTF8.GetBytes("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs")
+                        Image= Encoding.UTF8.GetBytes("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs")
                     },
-                    new Post
+                    new ChannelPost
                     {
                         Id = new Guid("aaaa1111-1111-1111-1111-111111111112"),
                         CreationTime = DateTime.Parse("2018-11-11T11:11:12"),
-                        SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
+                        CreatorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
                         Text = "yoohahah",
-                        ImageUrl= Encoding.UTF8.GetBytes("https://profilepicturesdp.com/wp-content/uploads/2018/07/picture-for-profile-facebook-3.jpg")
+                        Image= Encoding.UTF8.GetBytes("https://profilepicturesdp.com/wp-content/uploads/2018/07/picture-for-profile-facebook-3.jpg")
                     }
                 });
             });
@@ -83,7 +83,7 @@ namespace KP.BackEnd.Data
                         IsExpired = false,
                         StartTime = null,
                         SupervisorCreated = true,
-                        Type = CardType.Todo
+                        Status = CardStatus.Todo
                     },
                     new Card
                     {
@@ -95,7 +95,7 @@ namespace KP.BackEnd.Data
                         IsExpired = false,
                         StartTime = null,
                         SupervisorCreated = true,
-                        Type = CardType.Burned
+                        Status = CardStatus.Burned
                     }
                     
                 });
@@ -105,7 +105,7 @@ namespace KP.BackEnd.Data
         
         public DbSet<Student> Students { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<ChannelPost> Posts { get; set; }
         public DbSet<Card> Cards { get; set; }
     }
 }

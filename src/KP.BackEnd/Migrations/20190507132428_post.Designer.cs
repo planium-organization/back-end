@@ -96,22 +96,22 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Post", b =>
+            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<string>("ImageUrl");
+                    b.Property<string>("Image");
 
-                    b.Property<Guid>("SupervisorId");
+                    b.Property<Guid>("CreatorId");
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SupervisorId");
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Posts");
 
@@ -245,11 +245,11 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Post", b =>
+            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
                 {
                     b.HasOne("KP.BackEnd.Models.Supervisor", "Creator")
                         .WithMany()
-                        .HasForeignKey("SupervisorId")
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,10 +1,9 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using KP.BackEnd.DTOs;
 
-namespace KP.BackEnd.Controllers
+namespace KP.BackEnd.Areas.Shared.Contorllers
 {
     [ApiController, Route("api/[controller]/[action]")]
     public class AccountController : Controller
