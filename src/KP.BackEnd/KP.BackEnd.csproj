@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
+    <None Remove="Areas\Student\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +22,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Student\DTOs" />
     <Folder Include="Data\Migrations" />
     <Folder Include="Student" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Student\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Areas\Student\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Student\**" />
   </ItemGroup>
 
 </Project>
