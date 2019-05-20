@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KP.BackEnd.Areas.Shared.DTOs.Card;
 using KP.BackEnd.Data;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +25,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 
         [AllowAnonymous]
         [HttpGet("{date}/{range}")]
-        public async Task<ActionResult<Card>> GetAll(DateTime date, int range)
+        public async Task<ActionResult<IEnumerable<CardGetDto>>> GetAll(DateTime date, int range)
         {
             var cards = await _context.Cards.Where(x => x.DueDate.Date.Subtract(date.Date).Days < range).ToListAsync();
             
@@ -32,7 +34,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Card>> Get(Guid id)
+        public async Task<ActionResult<CardGetDto>> Get(Guid id)
         {
             var card = await _context.Cards.FindAsync(id);
 
@@ -41,7 +43,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CardDto cardDto)
+        public async Task<ActionResult> Create([FromBody] Shared.DTOs.Card.CardCreateDto cardDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

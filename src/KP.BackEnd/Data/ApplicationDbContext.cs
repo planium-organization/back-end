@@ -105,7 +105,9 @@ namespace KP.BackEnd.Data
         
         public DbSet<Student> Students { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
-        public DbSet<ChannelPost> Posts { get; set; }
+        public DbSet<ChannelPost> ChannelPosts { get; set; }
         public DbSet<Card> Cards { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }
