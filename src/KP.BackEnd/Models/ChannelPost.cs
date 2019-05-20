@@ -14,8 +14,8 @@ namespace KP.BackEnd.Models
         
         public byte[] Image { get; set; }
         
-        [Required]
         public Supervisor Creator { get; set; }
+        [Required]
         public Guid CreatorId { get; set; }
     }
 }

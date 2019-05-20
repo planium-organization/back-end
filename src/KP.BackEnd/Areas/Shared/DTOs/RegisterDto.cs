@@ -1,4 +1,4 @@
-namespace KP.BackEnd.Areas.Supervisor.DTOs
+namespace KP.BackEnd.Areas.Shared.DTOs
 {
     public class RegisterDto
     {

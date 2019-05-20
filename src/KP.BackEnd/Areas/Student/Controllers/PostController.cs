@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using KP.BackEnd.Areas.Shared.DTOs.ChannelPost;
 using KP.BackEnd.Areas.Student.DTOs;
-using KP.BackEnd.Areas.Student.DTOs.ChannelPost;
+using KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost;
 using KP.BackEnd.Data;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -22,33 +23,37 @@ namespace KP.BackEnd.Areas.Student.Controllers
         {
             _context = context;
         }
+        
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<ChannelPostGetDto>> Get(Guid id)
+        {
+            var channelPost = await _context.ChannelPosts.FirstOrDefaultAsync(c => c.Id == id); // TODO filter by classId
+            var channelPostGetDto = new ChannelPostGetDto(channelPost);
+            return Ok(channelPostGetDto);
+        }
 
         [HttpGet("{page}/{count}")]
         public async Task<ActionResult<ChannelPost>> GetAll(int page, int count)
         {
-            var posts = await _context.Posts.Skip(page * count).Take(count).ToListAsync();
+            var posts = await _context.ChannelPosts.Skip(page * count).Take(count).ToListAsync();
             
             return Ok(posts);
         }
         
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] PostDto postDto)
+        public async Task<ActionResult> Create([FromBody] ChannelPostCreateDto channelPostostDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            
-            var post= new ChannelPost()
-            {
-                Image = postDto.ImageUrl,
-                Text = postDto.Text,
-                CreationTime = DateTime.Now,
-               Creator = _context.Supervisors.First() //TODO
-            };
+
+            var userId = Guid.Parse(User.Identity.Name);
+            var channelPost = channelPostostDto.ToChannelPost(userId);
                 
-            await _context.Posts.AddAsync(post);
+            await _context.ChannelPosts.AddAsync(channelPost);
             await _context.SaveChangesAsync();
                 
-            return Ok();
+            return CreatedAtAction(nameof(Get), new ChannelPostGetDto(channelPost));
         }
     }
 }

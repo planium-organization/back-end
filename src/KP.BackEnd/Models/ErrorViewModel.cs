@@ -6,8 +6,6 @@ namespace KP.BackEnd.Models
     {
         public ErrorViewModel()
         {
-            int x = 12;
-            Console.WriteLine(x);
         }
     }
 }
