@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.ChannelPost;
 using KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost;
 using KP.BackEnd.Data;
-using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +42,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] ChannelPostCreateDto channelPostDto)
+        public async Task<ActionResult<ChannelPostGetDto>> Create([FromBody] ChannelPostCreateDto channelPostDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -54,7 +52,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
                 
             await _context.ChannelPosts.AddAsync(channelPost);
             await _context.SaveChangesAsync();
-                
+            
             return CreatedAtAction(nameof(Get), new ChannelPostGetDto(channelPost), null);
         }
     }

@@ -12,7 +12,7 @@ namespace KP.BackEnd.Areas.Shared.DTOs.Card
             StartTime = card.StartTime;
             Description = card.Description;
             Expired = StartTime == null ? (DateTime.Today - DueDate.Date).Days >= 1 : (StartTime + Duration) < DateTime.Now;
-            Editable = !Expired && card.Status != CardStatus.Done && card.CreatorId == requesterId;
+            Editable = !Expired && card.Status != CardStatus.Done && card.StudentId == requesterId;
             Done = card.Status == CardStatus.Done;
         }
 

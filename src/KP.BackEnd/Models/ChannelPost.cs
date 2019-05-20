@@ -1,13 +1,17 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mime;
 
 namespace KP.BackEnd.Models
 {
     public class ChannelPost
     {
-        public Guid Id { get; set; }
-        
+        private Guid _id;
+
+        public Guid Id {
+            get => _id;
+            set => _id = value;
+        }
+
         public DateTime CreationTime { get; set; }
         
         public string Text { get; set; }
@@ -17,5 +21,6 @@ namespace KP.BackEnd.Models
         public Supervisor Creator { get; set; }
         [Required]
         public Guid CreatorId { get; set; }
+        public Guid ClassId { get; set; } // TODO
     }
 }

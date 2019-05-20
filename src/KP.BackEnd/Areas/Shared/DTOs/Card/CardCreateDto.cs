@@ -24,7 +24,7 @@ namespace KP.BackEnd.Areas.Shared.DTOs.Card
                 Description = Description,
                 DueDate = DueDate,
                 StartTime = StartTime,
-                CreatorId = creatorId
+                StudentId = creatorId
             };
         }
     }

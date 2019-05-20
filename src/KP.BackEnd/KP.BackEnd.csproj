@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Student\DTOs\Card" />
-  </ItemGroup>
-
 </Project>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using KP.BackEnd.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +7,7 @@ namespace KP.BackEnd.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
             
@@ -23,26 +20,23 @@ namespace KP.BackEnd.Data
             builder.Entity<Student>(student => {
                 student.HasKey(s => s.Id);
                 
-//                student.HasOne<ApplicationUser>(s => s.Identity)
-//                    .WithOne()
-//                    .HasForeignKey<Student>(s => s.Id)
-//                    .IsRequired();
+                student.HasOne(s => s.Identity)
+                    .WithOne()
+                    .HasForeignKey<Student>(s => s.Id)
+                    .IsRequired();
             });
             
             builder.Entity<Supervisor>(supervisor => {
                 supervisor.HasKey(s => s.Id);
                 
-//                supervisor.HasOne<ApplicationUser>(s => s.Identity)
-//                    .WithOne()
-//                    .HasForeignKey<Supervisor>(s => s.Id)
-//                    .IsRequired();
+                supervisor.HasOne(s => s.Identity)
+                    .WithOne()
+                    .HasForeignKey<Supervisor>(s => s.Id)
+                    .IsRequired();
                 
-                supervisor.HasData(new  Supervisor[]
+                supervisor.HasData(new Supervisor
                 {
-                  new Supervisor
-                  {
-                      Id = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
-                  } 
+                    Id = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
                 });
             });
 
@@ -75,7 +69,7 @@ namespace KP.BackEnd.Data
                     Duration   =  new TimeSpan(1,11,11),
                     StartTime = null,
                     Status = CardStatus.Todo,
-                    CreatorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
+                    StudentId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
                 }, new Card
                 {
                     Description = "example desc 2",
@@ -84,7 +78,7 @@ namespace KP.BackEnd.Data
                     Duration   =  new TimeSpan(2,11,11),
                     StartTime = null,
                     Status = CardStatus.Done,
-                    CreatorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
+                    StudentId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111")
                 });
             });
             
@@ -92,8 +86,11 @@ namespace KP.BackEnd.Data
         
         public DbSet<Student> Students { get; set; }
         public DbSet<Supervisor> Supervisors { get; set; }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<ChannelPost> ChannelPosts { get; set; }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<Card> Cards { get; set; }
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public DbSet<Comment> Comments { get; set; }
 
     }

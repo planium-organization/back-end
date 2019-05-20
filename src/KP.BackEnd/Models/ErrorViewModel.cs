@@ -1,5 +1,3 @@
-using System;
-
 namespace KP.BackEnd.Models
 {
     public class ErrorViewModel
