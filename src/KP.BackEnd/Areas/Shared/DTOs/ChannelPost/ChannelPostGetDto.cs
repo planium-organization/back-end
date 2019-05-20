@@ -1,10 +1,10 @@
 using System;
 
-namespace KP.BackEnd.Areas.Student.DTOs.ChannelPost
+namespace KP.BackEnd.Areas.Shared.DTOs.ChannelPost
 {
     public class ChannelPostGetDto
     {
-        
+        public Guid Id { get; set; }
         public DateTime CreationTime { get; set; }
         
         public string Text { get; set; }
@@ -15,6 +15,7 @@ namespace KP.BackEnd.Areas.Student.DTOs.ChannelPost
         
         public ChannelPostGetDto(Models.ChannelPost channelPost)
         {
+            Id = channelPost.Id;
             Text = channelPost.Text;
             Image = channelPost.Image;
             CreatorId = channelPost.CreatorId;

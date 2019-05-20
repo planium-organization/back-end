@@ -1,6 +1,6 @@
 using System;
 
-namespace KP.BackEnd.Areas.Student.DTOs.ChannelPost
+namespace KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost
 {
     public class ChannelPostCreateDto
     {

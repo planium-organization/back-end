@@ -1,6 +1,6 @@
 using System;
 
-namespace KP.BackEnd.Areas.Supervisor.DTOs.Comment
+namespace KP.BackEnd.Areas.Shared.DTOs.Comment
 {
     public class CommentGetDto
     {

@@ -1,7 +1,7 @@
 using System;
 using KP.BackEnd.Models;
 
-namespace KP.BackEnd.Areas.Student.DTOs.Card
+namespace KP.BackEnd.Areas.Shared.DTOs.Card
 {
     public class CardCreateDto
     {
