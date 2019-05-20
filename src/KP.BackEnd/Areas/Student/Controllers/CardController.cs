@@ -6,6 +6,7 @@ using KP.BackEnd.Areas.Student.DTOs.Card;
 using KP.BackEnd.Data;
 using KP.BackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,25 +61,26 @@ namespace KP.BackEnd.Areas.Student.Controllers
             await _context.Cards.AddAsync(card);
             await _context.SaveChangesAsync();
                 
-            return Ok();
+            return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Edit(Guid id, [FromBody] CardGetDto cardGetDto)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> Edit(Guid id, [FromBody] JsonPatchDocument<CardPatchDto> cardPatch)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var userId = Guid.Parse(User.Identity.Name);
 
-            var card = _context.Cards.Find(id);
+            var card = await _context.Cards
+                .FirstOrDefaultAsync(c => c.Id == id && c.CreatorId == userId);
             if (card == null)
-                return NotFound("Card id is not valid");
+                return NotFound("card not found");
 
-            card.Status = cardGetDto.Type;
+            var cardPatchDto = new CardPatchDto(card, userId);
+            cardPatch.ApplyTo(cardPatchDto);
 
-            await _context.SaveChangesAsync();
             
+            await _context.SaveChangesAsync();
+
             return Ok();
         }
-        
     }
 }

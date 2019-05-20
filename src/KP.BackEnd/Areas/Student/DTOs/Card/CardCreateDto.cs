@@ -1,13 +1,18 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using KP.BackEnd.Models;
 
 namespace KP.BackEnd.Areas.Student.DTOs.Card
 {
     public class CardCreateDto
     {
+        [Required]
         public TimeSpan Duration { get; set; }
+        [Required]
         public DateTime DueDate { get; set; }
-        public string Description{ get; set; } 
+        [Required]
+        public string Description{ get; set; }
+        [Required]
         public CardStatus Status { get; set; }
         public DateTime? StartTime { get; set; }
 
