@@ -21,7 +21,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
 
         public CardController(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;	
         }
 
         [HttpGet("{date}/{range}")]
