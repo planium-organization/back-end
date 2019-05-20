@@ -7,6 +7,12 @@ namespace KP.BackEnd.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
+        private DbSet<Student> _students;
+        private DbSet<Supervisor> _supervisors;
+        private DbSet<ChannelPost> _channelPosts;
+        private DbSet<Comment> _comments;
+        private DbSet<Card> _cards;
+
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
@@ -83,15 +89,33 @@ namespace KP.BackEnd.Data
             });
             
         }
-        
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Supervisor> Supervisors { get; set; }
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public DbSet<ChannelPost> ChannelPosts { get; set; }
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public DbSet<Card> Cards { get; set; }
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Student> Students {
+            get => _students;
+            set => _students = value;
+        }
+
+        public DbSet<Supervisor> Supervisors {
+            get => _supervisors;
+            set => _supervisors = value;
+        }
+
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public DbSet<ChannelPost> ChannelPosts {
+            get => _channelPosts;
+            set => _channelPosts = value;
+        }
+
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public DbSet<Card> Cards {
+            get => _cards;
+            set => _cards = value;
+        }
+
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public DbSet<Comment> Comments {
+            get => _comments;
+            set => _comments = value;
+        }
     }
 }

@@ -4,8 +4,18 @@ namespace KP.BackEnd.Models
 {
     public class Supervisor
     {
-        public Guid Id { get; set; }
-        public ApplicationUser Identity { get; set; }
+        private Guid _id;
+        private ApplicationUser _identity;
+
+        public Guid Id {
+            get => _id;
+            set => _id = value;
+        }
+
+        public ApplicationUser Identity {
+            get => _identity;
+            set => _identity = value;
+        }
 
 //        public Guid IdentityId { get; set; }
 //        public ICollection<SchClass> SchClasses { get; set; }

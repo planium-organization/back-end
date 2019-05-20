@@ -4,11 +4,31 @@ namespace KP.BackEnd.Areas.Shared.DTOs.Comment
 {
     public class CommentGetDto
     {
-        public DateTime Date { get; set; }
-        public string Text { get; set; }
-        public Guid SupervisorId { get; set; }
-        public Guid StudentId { get; set; }
-        
+        private DateTime _date;
+        private string _text;
+        private Guid _supervisorId;
+        private Guid _studentId;
+
+        public DateTime Date {
+            get => _date;
+            set => _date = value;
+        }
+
+        public string Text {
+            get => _text;
+            set => _text = value;
+        }
+
+        public Guid SupervisorId {
+            get => _supervisorId;
+            set => _supervisorId = value;
+        }
+
+        public Guid StudentId {
+            get => _studentId;
+            set => _studentId = value;
+        }
+
         public CommentGetDto(Models.Comment comment)
         {
             Text = comment.Text;

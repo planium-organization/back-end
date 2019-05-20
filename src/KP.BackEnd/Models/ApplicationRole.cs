@@ -5,6 +5,11 @@ namespace KP.BackEnd.Models
 {
     public class ApplicationRole : IdentityRole<Guid>
     {
-        public string Description { get; set; }
+        private string _description;
+
+        public string Description {
+            get => _description;
+            set => _description = value;
+        }
     }
 }

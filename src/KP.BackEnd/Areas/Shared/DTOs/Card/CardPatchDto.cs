@@ -1,16 +1,42 @@
 using System;
 using KP.BackEnd.Models;
 
-namespace KP.BackEnd.Areas.Student.DTOs.Card
+namespace KP.BackEnd.Areas.Shared.DTOs.Card
 {
     public class CardPatchDto
     {
-        public TimeSpan Duration { get; set; }
-        public DateTime DueDate { get; set; }
-        public string Description{ get; set; } 
-        public CardStatus Status { get; set; }
-        public DateTime? StartTime { get; set; }
-        
+        private TimeSpan _duration;
+        private DateTime _dueDate;
+        private string _description;
+        private CardStatus _status;
+        private DateTime? _startTime;
+
+        public TimeSpan Duration {
+            get => _duration;
+            set => _duration = value;
+        }
+
+
+        public DateTime DueDate {
+            get => _dueDate;
+            set => _dueDate = value;
+        }
+
+        public string Description {
+            get => _description;
+            set => _description = value;
+        }
+
+        public CardStatus Status {
+            get => _status;
+            set => _status = value;
+        }
+
+        public DateTime? StartTime {
+            get => _startTime;
+            set => _startTime = value;
+        }
+
         public CardPatchDto(Models.Card card, Guid requesterId)
         {
             Duration = card.Duration;

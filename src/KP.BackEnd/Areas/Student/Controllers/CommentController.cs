@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Card;
 using KP.BackEnd.Areas.Shared.DTOs.Comment;
-using KP.BackEnd.Areas.Student.DTOs.Card;
 using KP.BackEnd.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;

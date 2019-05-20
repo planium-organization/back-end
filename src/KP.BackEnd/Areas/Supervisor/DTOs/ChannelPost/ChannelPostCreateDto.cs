@@ -5,10 +5,20 @@ namespace KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost
 {
     public class ChannelPostCreateDto
     {
+        private string _text;
+        private byte[] _image;
+
         [Required]
-        public string Text { get; set; }
+        public string Text {
+            get => _text;
+            set => _text = value;
+        }
+
         [Required]
-        public byte[] Image { get; set; }
+        public byte[] Image {
+            get => _image;
+            set => _image = value;
+        }
 
         public Models.ChannelPost ToChannelPost(Guid creatorId)
         {

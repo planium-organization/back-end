@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using KP.BackEnd.Models;
 
-namespace KP.BackEnd.Areas.Shared.DTOs.Card
+namespace KP.BackEnd.Areas.Supervisor.DTOs.Card
 {
     public class CardCreateDto
     {
@@ -11,6 +11,13 @@ namespace KP.BackEnd.Areas.Shared.DTOs.Card
         private string _description;
         private CardStatus _status;
         private DateTime? _startTime;
+        private Guid _studentId;
+
+        [Required]
+        public Guid StudentId {
+            get => _studentId;
+            set => _studentId = value;
+        }
 
         [Required]
         public TimeSpan Duration {
@@ -49,7 +56,8 @@ namespace KP.BackEnd.Areas.Shared.DTOs.Card
                 Description = Description,
                 DueDate = DueDate,
                 StartTime = StartTime,
-                StudentId = creatorId
+                SupervisorId = creatorId,
+                StudentId = StudentId
             };
         }
     }
