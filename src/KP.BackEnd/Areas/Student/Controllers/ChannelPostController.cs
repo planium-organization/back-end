@@ -11,6 +11,7 @@ using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
@@ -34,9 +35,10 @@ namespace KP.BackEnd.Areas.Student.Controllers
         }
 
         [HttpGet("{page}/{count}")]
-        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(int page, int count)
+        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
-            var channelPosts = await _channelPostRepository.GetRange(page, count);
+//            var userId = Guid.Parse(User.Identity.Name);
+            var channelPosts = await _channelPostRepository.GetRange(classId,page, count);
             var channelPostGetDtos = channelPosts.Select(p => new ChannelPostGetDto(p)).ToList();
             return Ok(channelPostGetDtos);
         }

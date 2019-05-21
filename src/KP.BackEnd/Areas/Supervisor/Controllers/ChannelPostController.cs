@@ -32,9 +32,9 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         }
         
         [HttpGet("{page}/{count}")]
-        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(int page, int count)
+        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
-            var channelPosts = await _channelPostRepository.GetRange(page, count);
+            var channelPosts = await _channelPostRepository.GetRange(classId,page, count);
             var channelPostDtos = channelPosts.Select(cp => new ChannelPostGetDto(cp));
             return Ok(channelPostDtos);
         }

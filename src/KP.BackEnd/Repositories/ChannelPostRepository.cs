@@ -26,9 +26,10 @@ namespace KP.BackEnd.Repositories
             return await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id && p.CreatorId == userId);
         }
         
-        public async Task<List<ChannelPost>> GetRange(int page, int count)
+        public async Task<List<ChannelPost>> GetRange(Guid classId,int page, int count)
         {
             return await _context.ChannelPosts
+                .Where(x=> x.ClassId ==classId)
                 .Skip(page * count)
                 .Take(count)
                 .ToListAsync();
