@@ -159,13 +159,13 @@ namespace KP.BackEnd.Migrations
 
                     b.Property<string>("Image");
 
-                    b.Property<Guid>("CreatorId");
+                    b.Property<Guid>("StudentId");
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Posts");
 
@@ -303,7 +303,7 @@ namespace KP.BackEnd.Migrations
                 {
                     b.HasOne("KP.BackEnd.Models.Supervisor", "Creator")
                         .WithMany()
-                        .HasForeignKey("CreatorId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

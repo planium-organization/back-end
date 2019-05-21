@@ -1,4 +1,4 @@
-namespace KP.BackEnd.Areas.Student.DTOs
+namespace KP.BackEnd.Areas.Shared.DTOs
 {
     public class LoginDto
     {
