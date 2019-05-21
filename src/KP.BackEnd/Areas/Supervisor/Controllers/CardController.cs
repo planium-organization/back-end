@@ -54,7 +54,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var userId = Guid.Parse(User.Identity.Name);
             var card = cardDto.ToCard(userId);
 
-            await _cardRepository.SaveChanges();                
+            await _cardRepository.Add(card);                
             return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
 

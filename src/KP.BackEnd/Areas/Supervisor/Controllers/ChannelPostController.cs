@@ -48,7 +48,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var userId = Guid.Parse(User.Identity.Name);
             var channelPost = channelPostDto.ToChannelPost(userId);
 
-            await _channelPostRepository.SaveChanges();
+            await _channelPostRepository.Add(channelPost);
             
             return CreatedAtAction(nameof(Get), new ChannelPostGetDto(channelPost), null);
         }
