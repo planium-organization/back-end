@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.ChannelPost;
 using KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost;
 using KP.BackEnd.Data;
+using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,28 +17,25 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     [ApiController]
     public class ChannelPostController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public ChannelPostController(ApplicationDbContext context)
+        private readonly ChannelPostRepository _channelPostRepository;
+        public ChannelPostController(ChannelPostRepository channelPostRepository)
         {
-            _context = context;
+            _channelPostRepository = channelPostRepository;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ChannelPostGetDto>> Get(Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var channelPost = await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id && p.CreatorId == userId);
+            var channelPost = await _channelPostRepository.Find(userId, id);
             return Ok(new ChannelPostGetDto(channelPost));
         }
         
         [HttpGet("{page}/{count}")]
         public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(int page, int count)
         {
-            var channelPosts = await _context.ChannelPosts.Skip(page * count).Take(count).ToListAsync();
-            
+            var channelPosts = await _channelPostRepository.GetRange(page, count);
             var channelPostDtos = channelPosts.Select(cp => new ChannelPostGetDto(cp));
-            
             return Ok(channelPostDtos);
         }
         
@@ -49,9 +47,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 
             var userId = Guid.Parse(User.Identity.Name);
             var channelPost = channelPostDto.ToChannelPost(userId);
-                
-            await _context.ChannelPosts.AddAsync(channelPost);
-            await _context.SaveChangesAsync();
+
+            await _channelPostRepository.SaveChanges();
             
             return CreatedAtAction(nameof(Get), new ChannelPostGetDto(channelPost), null);
         }

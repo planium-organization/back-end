@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Card;
 using KP.BackEnd.Data;
+using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,28 +19,25 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     [ApiController]
     public class CardController :ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public CardController(ApplicationDbContext context)
+        private readonly CardRepository _cardRepository;
+        public CardController(CardRepository cardRepository)
         {
-            _context = context;
+            _cardRepository = cardRepository;
         }
 
         [HttpGet("{studentId}/{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetAll(Guid studentId, DateTime date, int range)
         {
-            var cards = await _context.Cards
-                .Where(x => x.StudentId == studentId && x.DueDate.Date.Subtract(date.Date).Days < range)
-                .ToListAsync();
+            var cards = await _cardRepository.GetRange(studentId, date, range);
             
             return Ok(cards);
         }
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CardGetDto>> Get(Guid id)
+        [HttpGet("{studentId}/{id}")]
+        public async Task<ActionResult<CardGetDto>> Get(Guid studentId, Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var card = await _context.Cards.Where(c => c.StudentId == userId && c.Id == id).FirstOrDefaultAsync();
+            var card = await _cardRepository.Find(studentId, id);
             if (card == null)
                 return NotFound("card not found");
             
@@ -54,10 +53,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 
             var userId = Guid.Parse(User.Identity.Name);
             var card = cardDto.ToCard(userId);
-                
-            await _context.Cards.AddAsync(card);
-            await _context.SaveChangesAsync();
-                
+
+            await _cardRepository.SaveChanges();                
             return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
 
