@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Card;
+using KP.BackEnd.Areas.Student.DTOs.Card;
 using KP.BackEnd.Data;
+using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +18,18 @@ namespace KP.BackEnd.Areas.Student.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CardRepository _cardRepository;
 
-        public CardController(ApplicationDbContext context)
+        public CardController(CardRepository cardRepository)
         {
-            _context = context;
+            _cardRepository = cardRepository;
         }
 
         [HttpGet("{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetAll(DateTime date, int range)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var cards = await _context.Cards
-                .Where(x => x.StudentId == userId && x.DueDate.Date.Subtract(date.Date).Days < range)
-                .ToListAsync();
+            var cards = await _cardRepository.GetRange(userId, date, range);
 
             var cardDtos = cards.Select(c => new CardGetDto(c, userId));
             
@@ -40,7 +40,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         public async Task<ActionResult<CardGetDto>> Get(Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var card = await _context.Cards.Where(c => c.StudentId == userId && c.Id == id).FirstOrDefaultAsync();
+            var card = await _cardRepository.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
             
@@ -56,9 +56,8 @@ namespace KP.BackEnd.Areas.Student.Controllers
 
             var userId = Guid.Parse(User.Identity.Name);
             var card = cardDto.ToCard(userId);
-                
-            await _context.Cards.AddAsync(card);
-            await _context.SaveChangesAsync();
+
+            await _cardRepository.Add(card);
                 
             return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
@@ -68,8 +67,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         {
             var userId = Guid.Parse(User.Identity.Name);
 
-            var card = await _context.Cards
-                .FirstOrDefaultAsync(c => c.Id == id && c.StudentId == userId);
+            var card = await _cardRepository.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
 
@@ -78,8 +76,8 @@ namespace KP.BackEnd.Areas.Student.Controllers
 
             // TODO user automapper for general purpose editing
             card.Status = cardPatchDto.Status;
-            
-            await _context.SaveChangesAsync();
+
+            await _cardRepository.SaveChanges();
 
             return Ok();
         }

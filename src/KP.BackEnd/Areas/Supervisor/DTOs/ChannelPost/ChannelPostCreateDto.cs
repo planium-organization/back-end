@@ -7,6 +7,12 @@ namespace KP.BackEnd.Areas.Supervisor.DTOs.ChannelPost
     {
         private string _text;
         private byte[] _image;
+        private Guid _classId;
+
+        public Guid ClassId {
+            get => _classId;
+            set => _classId = value;
+        }
 
         [Required]
         public string Text {

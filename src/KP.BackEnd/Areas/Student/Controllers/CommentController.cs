@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Card;
 using KP.BackEnd.Areas.Shared.DTOs.Comment;
 using KP.BackEnd.Data;
+using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -17,22 +18,19 @@ namespace KP.BackEnd.Areas.Student.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public CommentController(ApplicationDbContext context)
+        private readonly CommentRepository _commentRepositoryRepository;
+        public CommentController(CommentRepository commentRepository)
         {
-            _context = context;
+            _commentRepositoryRepository = commentRepository;
         }
 
-        [HttpGet("{date}/{count}")]
-        public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(DateTime date, int count)
+        [HttpGet("{studentId}/{date}/{page}/{count}")]
+        public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(Guid studentId, DateTime date, int page, int count)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var comments = await _context.Comments
-                .Where(c => c.StudentId == userId && c.CreationTime.Date == date)
-                .OrderBy(c => c.CreationTime)
-                .Take(count)
-                .ToListAsync();
+
+            var comments = await _commentRepositoryRepository
+                .GetRange(userId, studentId, date, page, count);
 
             var commentDtos = comments.Select(c => new CommentGetDto(c));
             return Ok(commentDtos);
@@ -42,7 +40,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         public async Task<ActionResult<CommentGetDto>> Get(Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.StudentId == userId && c.Id == id);
+            var comment = await _commentRepositoryRepository.Find(userId, id);
             if (comment == null)
                 return NotFound("card not found");
             
