@@ -38,5 +38,11 @@ namespace KP.BackEnd.Repositories
         {
             await _context.SaveChangesAsync();
         }
+
+        public async Task Add(ChannelPost channelPost)
+        {
+            await _context.ChannelPosts.AddAsync(channelPost);
+            await _context.SaveChangesAsync();
+        }
     }
 }
