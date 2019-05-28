@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KP.BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190507132428_post")]
-    partial class post
+    [Migration("20190508115906_update_card")]
+    partial class update_card
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,6 +94,56 @@ namespace KP.BackEnd.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("KP.BackEnd.Models.Card", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("DueDate");
+
+                    b.Property<TimeSpan>("Duration");
+
+                    b.Property<bool>("IsDone");
+
+                    b.Property<bool>("IsExpired");
+
+                    b.Property<DateTime?>("StartTime");
+
+                    b.Property<bool>("SupervisorCreated");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("cccc1111-1111-1111-1111-111111111111"),
+                            Description = "salaam",
+                            DueDate = new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = new TimeSpan(0, 1, 11, 11, 0),
+                            IsDone = false,
+                            IsExpired = false,
+                            SupervisorCreated = true,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("cccc1111-1111-1111-1111-111111111112"),
+                            Description = "yahaha",
+                            DueDate = new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Duration = new TimeSpan(0, 2, 11, 11, 0),
+                            IsDone = false,
+                            IsExpired = false,
+                            SupervisorCreated = true,
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>

@@ -29,7 +29,7 @@ namespace KP.BackEnd.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cards",
-                columns: new[] { "Id", "Description", "DueDate", "Duration", "IsDone", "IsEditable", "IsExpired", "StartTime", "SupervisorCreated", "Type" },
+                columns: new[] { "Id", "Description", "DueDate", "Duration", "IsDone", "IsEditable", "IsExpired", "StartTime", "SupervisorCreated", "Status" },
                 values: new object[,]
                 {
                     { new Guid("cccc1111-1111-1111-1111-111111111111"), "salaam", new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 1, 11, 11, 0), false, false, false, null, true, 0 },

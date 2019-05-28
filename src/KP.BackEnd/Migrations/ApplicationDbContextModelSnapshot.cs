@@ -3,7 +3,6 @@ using System;
 using KP.BackEnd.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KP.BackEnd.Migrations
@@ -107,15 +106,13 @@ namespace KP.BackEnd.Migrations
 
                     b.Property<bool>("IsDone");
 
-                    b.Property<bool>("IsEditable");
-
                     b.Property<bool>("IsExpired");
 
                     b.Property<DateTime?>("StartTime");
 
                     b.Property<bool>("SupervisorCreated");
 
-                    b.Property<int>("Type");
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -129,7 +126,6 @@ namespace KP.BackEnd.Migrations
                             DueDate = new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 1, 11, 11, 0),
                             IsDone = false,
-                            IsEditable = false,
                             IsExpired = false,
                             SupervisorCreated = true,
                             Type = 0
@@ -141,29 +137,28 @@ namespace KP.BackEnd.Migrations
                             DueDate = new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 2, 11, 11, 0),
                             IsDone = false,
-                            IsEditable = false,
                             IsExpired = false,
                             SupervisorCreated = true,
                             Type = 1
                         });
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Post", b =>
+            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<string>("ImageUrl");
+                    b.Property<string>("Image");
 
-                    b.Property<Guid>("SupervisorId");
+                    b.Property<Guid>("StudentId");
 
                     b.Property<string>("Text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SupervisorId");
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Posts");
 
@@ -297,11 +292,11 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Post", b =>
+            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
                 {
                     b.HasOne("KP.BackEnd.Models.Supervisor", "Creator")
                         .WithMany()
-                        .HasForeignKey("SupervisorId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
