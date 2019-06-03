@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Repositories
 {
-    public class ChannelPostRepository
+    public class ChannelPostRepository : IChannelPostRepository
     {
         private readonly ApplicationDbContext _context;
 

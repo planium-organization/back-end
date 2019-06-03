@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Card;
 using KP.BackEnd.Data;
+using KP.BackEnd.Persistence;
 using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Internal;
@@ -19,16 +20,16 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     [ApiController]
     public class CardController :ControllerBase
     {
-        private readonly CardRepository _cardRepository;
-        public CardController(CardRepository cardRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CardController(IUnitOfWork unitOfWork)
         {
-            _cardRepository = cardRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("{studentId}/{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetAll(Guid studentId, DateTime date, int range)
         {
-            var cards = await _cardRepository.GetRange(studentId, date, range);
+            var cards = await _unitOfWork.Cards.GetRange(studentId, date, range);
             
             return Ok(cards);
         }
@@ -37,11 +38,12 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         public async Task<ActionResult<CardGetDto>> Get(Guid studentId, Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var card = await _cardRepository.Find(studentId, id);
+            var card = await _unitOfWork.Cards.Find(studentId, id);
             if (card == null)
                 return NotFound("card not found");
             
             var cardDto = new CardGetDto(card, userId);
+            
             return Ok(cardDto);
         }
         
@@ -54,7 +56,9 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var userId = Guid.Parse(User.Identity.Name);
             var card = cardDto.ToCard(userId);
 
-            await _cardRepository.Add(card);                
+            await _unitOfWork.Cards.Add(card);    
+            await _unitOfWork.Complete();
+            
             return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
 

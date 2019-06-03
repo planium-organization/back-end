@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Repositories
 {
-    public class CardRepository
+    public class CardRepository : ICardRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -32,12 +32,6 @@ namespace KP.BackEnd.Repositories
         public async Task Add(Card card)
         {
             await _context.Cards.AddAsync(card);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task SaveChanges()
-        {
-            await _context.SaveChangesAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Areas.Shared.DTOs.Comment;
 using KP.BackEnd.Data;
+using KP.BackEnd.Persistence;
 using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,18 +17,18 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     [ApiController]
     public class CommentController : ControllerBase
     {
-        private readonly CommentRepository _commentRepository;
-
-        public CommentController(CommentRepository commentRepository)
+        private readonly IUnitOfWork _unitOfWork;
+         
+        public CommentController(IUnitOfWork unitOfWork)
         {
-            _commentRepository = commentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("{studentId}/{date}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(Guid studentId, DateTime date, int page, int count)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var comments = await _commentRepository.GetRange(userId, studentId, date, page, count);
+            var comments = await _unitOfWork.Comments.GetRange(userId, studentId, date, page, count);
             var commentDtos = comments.Select(c => new CommentGetDto(c));
             return Ok(commentDtos);
         }
@@ -36,7 +37,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         public async Task<ActionResult<CommentGetDto>> Get(Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var comment = await _commentRepository.Find(userId, id);
+            var comment = await _unitOfWork.Comments.Find(userId, id);
             if (comment == null)
                 return NotFound("card not found");
             

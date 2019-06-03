@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Repositories
 {
-    public class CommentRepository
+    public class CommentRepository : ICommentRepository
     {
         private readonly ApplicationDbContext _context;
 
