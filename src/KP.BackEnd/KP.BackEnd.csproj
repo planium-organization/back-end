@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\DTOs\Sturdent" />
+    <Folder Include="Core\DTOs\Supervisor" />
+  </ItemGroup>
+
 </Project>

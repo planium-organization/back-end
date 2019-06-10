@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KP.BackEnd.Areas.Shared.DTOs.Card;
-using KP.BackEnd.Data;
+using KP.BackEnd.Core;
+using KP.BackEnd.Core.DTOs.Shared.Card;
 using KP.BackEnd.Persistence;
-using KP.BackEnd.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CardCreateDto = KP.BackEnd.Areas.Supervisor.DTOs.Card.CardCreateDto;
+using CardCreateDto = KP.BackEnd.Core.DTOs.Supervisor.Card.CardCreateDto;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {

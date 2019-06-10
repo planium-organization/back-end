@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using KP.BackEnd.Areas.Shared.DTOs;
+using KP.BackEnd.Core.DTOs.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
+using KP.BackEnd.Core.Models;
+using KP.BackEnd.Persistence.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using KP.BackEnd.Data;
-using KP.BackEnd.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
-using KP.BackEnd.Data;
-using KP.BackEnd.Repositories;
+using KP.BackEnd.Core;
+using KP.BackEnd.Core.Repositories;
+using KP.BackEnd.Persistence.Data;
 
 namespace KP.BackEnd.Persistence
 {
@@ -18,7 +19,7 @@ namespace KP.BackEnd.Persistence
 
         public async Task Complete()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
