@@ -6,6 +6,7 @@ namespace KP.BackEnd.Core
     public interface IUnitOfWork
     {
         ICardRepository Cards { get; }
+        ICommentRepository Comments { get; }
         Task Complete();
     }
 }
