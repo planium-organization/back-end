@@ -23,6 +23,7 @@ namespace KP.BackEnd.Persistence
             builder.ApplyConfiguration(new CourseConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CardConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
         }
 
         public DbSet<Course> Courses
