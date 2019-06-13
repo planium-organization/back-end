@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Core\DTOs\Sturdent" />
     <Folder Include="Core\DTOs\Supervisor" />
+    <Folder Include="Migrations" />
   </ItemGroup>
 
 </Project>

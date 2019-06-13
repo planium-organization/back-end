@@ -9,8 +9,7 @@ namespace KP.BackEnd.Core.Repositories
     {
         Task<ChannelPost> Find(Guid id);
         Task<ChannelPost> Find(Guid userId, Guid id);
-        Task<List<ChannelPost>> GetRange(Guid classId,int page, int count);
-        Task SaveChanges();
+        Task<IEnumerable<ChannelPost>> GetRange(Guid classId, int page, int count);
         Task Add(ChannelPost channelPost);
     }
 }

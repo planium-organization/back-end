@@ -18,7 +18,7 @@ namespace KP.BackEnd.Persistence.Repositories
             _context = context;
         }
         
-        public async Task<List<Card>> GetRange(Guid studentId, DateTime date, int range)
+        public async Task<IEnumerable<Card>> GetRange(Guid studentId, DateTime date, int range)
         {
             return await _context.Cards
                 .Where(x => x.StudentId == studentId && x.DueDate.Date.Subtract(date.Date).Days < range)

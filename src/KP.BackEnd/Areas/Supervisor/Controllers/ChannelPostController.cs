@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 using KP.BackEnd.Core;
 using KP.BackEnd.Core.DTOs.Shared.ChannelPost;
 using KP.BackEnd.Core.DTOs.Supervisor.ChannelPost;
-using KP.BackEnd.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
@@ -49,6 +47,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var channelPost = channelPostDto.ToChannelPost(userId);
 
             await _unitOfWork.ChannelPosts.Add(channelPost);
+            await _unitOfWork.Complete();
             
             return CreatedAtAction(nameof(Get), new ChannelPostGetDto(channelPost), null);
         }

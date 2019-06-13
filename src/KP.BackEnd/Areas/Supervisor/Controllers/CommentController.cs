@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Core;
 using KP.BackEnd.Core.DTOs.Shared.Comment;
-using KP.BackEnd.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {

@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using KP.BackEnd.Core;
 using KP.BackEnd.Core.DTOs.Shared.Card;
 using KP.BackEnd.Core.DTOs.Sturdent.Card;
-using KP.BackEnd.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {

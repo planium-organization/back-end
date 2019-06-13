@@ -4,12 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Core;
 using KP.BackEnd.Core.DTOs.Shared.ChannelPost;
-using KP.BackEnd.Migrations;
-using KP.BackEnd.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {

@@ -1,6 +1,10 @@
 ﻿using System.Threading.Tasks;
+using KP.BackEnd.Core;
 using KP.BackEnd.Core.Models;
+using KP.BackEnd.Core.Repositories;
+using KP.BackEnd.Persistence;
 using KP.BackEnd.Persistence.Data;
+using KP.BackEnd.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -25,10 +29,6 @@ namespace KP.BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-//            services.AddDbContext<ApplicationDbContext>(options =>
-//                options.UseSqlite(
-//                    Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(
@@ -77,6 +77,12 @@ namespace KP.BackEnd
 //            services.AddAntiforgery(antiforgeryOptions => {
 //                antiforgeryOptions.HeaderName = "X-XSRF-TOKEN";
 //            });
+
+            // DI Configurations
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICardRepository, CardRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IChannelPostRepository, ChannelPostRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

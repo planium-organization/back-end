@@ -27,7 +27,7 @@ namespace KP.BackEnd.Persistence.Repositories
             return await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id && p.CreatorId == userId);
         }
         
-        public async Task<List<ChannelPost>> GetRange(Guid classId,int page, int count)
+        public async Task<IEnumerable<ChannelPost>> GetRange(Guid classId,int page, int count)
         {
             return await _context.ChannelPosts
                 .Where(x=> x.ClassId ==classId)
@@ -36,15 +36,9 @@ namespace KP.BackEnd.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task SaveChanges()
-        {
-            await _context.SaveChangesAsync();
-        }
-
         public async Task Add(ChannelPost channelPost)
         {
             await _context.ChannelPosts.AddAsync(channelPost);
-            await _context.SaveChangesAsync();
         }
     }
 }

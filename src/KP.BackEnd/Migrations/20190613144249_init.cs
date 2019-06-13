@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KP.BackEnd.Migrations
 {
-    public partial class student : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,24 @@ namespace KP.BackEnd.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cards",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Duration = table.Column<TimeSpan>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: true),
+                    DueDate = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    StudentId = table.Column<Guid>(nullable: false),
+                    SupervisorId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cards", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,6 +208,72 @@ namespace KP.BackEnd.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ChannelPosts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    Text = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true),
+                    CreatorId = table.Column<Guid>(nullable: false),
+                    ClassId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChannelPosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChannelPosts_Supervisors_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "Supervisors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    Text = table.Column<string>(nullable: false),
+                    SupervisorId = table.Column<Guid>(nullable: false),
+                    StudentId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "Supervisors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cards",
+                columns: new[] { "Id", "Description", "DueDate", "Duration", "StartTime", "Status", "StudentId", "SupervisorId" },
+                values: new object[,]
+                {
+                    { new Guid("cccc1111-1111-1111-1111-111111111111"), "example desc", new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 1, 11, 11, 0), null, 0, new Guid("bbbb1111-1111-1111-1111-111111111111"), null },
+                    { new Guid("cccc1111-1111-1111-1111-111111111112"), "example desc 2", new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 2, 11, 11, 0), null, 1, new Guid("bbbb1111-1111-1111-1111-111111111111"), null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Supervisors",
+                column: "Id",
+                value: new Guid("bbbb1111-1111-1111-1111-111111111111"));
+
+            migrationBuilder.InsertData(
+                table: "ChannelPosts",
+                columns: new[] { "Id", "ClassId", "CreationTime", "CreatorId", "Image", "Text" },
+                values: new object[,]
+                {
+                    { new Guid("aaaa1111-1111-1111-1111-111111111111"), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(2018, 11, 11, 11, 11, 11, 0, DateTimeKind.Unspecified), new Guid("bbbb1111-1111-1111-1111-111111111111"), null, "example text" },
+                    { new Guid("aaaa1111-1111-1111-1111-111111111112"), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(2018, 11, 11, 11, 11, 12, 0, DateTimeKind.Unspecified), new Guid("bbbb1111-1111-1111-1111-111111111111"), null, "example text 2" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -226,6 +310,16 @@ namespace KP.BackEnd.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChannelPosts_CreatorId",
+                table: "ChannelPosts",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_SupervisorId",
+                table: "Comments",
+                column: "SupervisorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -246,13 +340,22 @@ namespace KP.BackEnd.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Cards");
+
+            migrationBuilder.DropTable(
+                name: "ChannelPosts");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Supervisors");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Supervisors");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

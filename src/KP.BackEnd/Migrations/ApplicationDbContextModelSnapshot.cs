@@ -18,7 +18,7 @@ namespace KP.BackEnd.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("KP.BackEnd.Models.ApplicationRole", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -43,7 +43,7 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.ApplicationUser", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -93,7 +93,7 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Card", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Card", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -104,15 +104,13 @@ namespace KP.BackEnd.Migrations
 
                     b.Property<TimeSpan>("Duration");
 
-                    b.Property<bool>("IsDone");
-
-                    b.Property<bool>("IsExpired");
-
                     b.Property<DateTime?>("StartTime");
 
-                    b.Property<bool>("SupervisorCreated");
-
                     b.Property<int>("Status");
+
+                    b.Property<Guid>("StudentId");
+
+                    b.Property<Guid?>("SupervisorId");
 
                     b.HasKey("Id");
 
@@ -122,69 +120,87 @@ namespace KP.BackEnd.Migrations
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111111"),
-                            Description = "salaam",
+                            Description = "example desc",
                             DueDate = new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 1, 11, 11, 0),
-                            IsDone = false,
-                            IsExpired = false,
-                            SupervisorCreated = true,
-                            Type = 0
+                            Status = 0,
+                            StudentId = new Guid("bbbb1111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111112"),
-                            Description = "yahaha",
+                            Description = "example desc 2",
                             DueDate = new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 2, 11, 11, 0),
-                            IsDone = false,
-                            IsExpired = false,
-                            SupervisorCreated = true,
-                            Type = 1
+                            Status = 1,
+                            StudentId = new Guid("bbbb1111-1111-1111-1111-111111111111")
                         });
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.ChannelPost", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("ClassId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<Guid>("CreatorId");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("ChannelPosts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("aaaa1111-1111-1111-1111-111111111111"),
+                            ClassId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationTime = new DateTime(2018, 11, 11, 11, 11, 11, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
+                            Text = "example text"
+                        },
+                        new
+                        {
+                            Id = new Guid("aaaa1111-1111-1111-1111-111111111112"),
+                            ClassId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreationTime = new DateTime(2018, 11, 11, 11, 11, 12, 0, DateTimeKind.Unspecified),
+                            CreatorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
+                            Text = "example text 2"
+                        });
+                });
+
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<string>("Image");
-
                     b.Property<Guid>("StudentId");
 
-                    b.Property<string>("Text");
+                    b.Property<Guid>("SupervisorId");
+
+                    b.Property<string>("Text")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("SupervisorId");
 
-                    b.ToTable("Posts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("aaaa1111-1111-1111-1111-111111111111"),
-                            CreationTime = new DateTime(2018, 11, 11, 11, 11, 11, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkd0smWMzjEh3YmdGR1bZAQsCOYgimI6v520smHROp8i-OoHqs",
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
-                            Text = "hello"
-                        },
-                        new
-                        {
-                            Id = new Guid("aaaa1111-1111-1111-1111-111111111112"),
-                            CreationTime = new DateTime(2018, 11, 11, 11, 11, 12, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://profilepicturesdp.com/wp-content/uploads/2018/07/picture-for-profile-facebook-3.jpg",
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
-                            Text = "yoohahah"
-                        });
+                    b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Student", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Student", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("Id");
 
                     b.Property<string>("Major");
 
@@ -195,10 +211,9 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.Supervisor", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Supervisor", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("Id");
 
                     b.HasKey("Id");
 
@@ -292,17 +307,41 @@ namespace KP.BackEnd.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("KP.BackEnd.Models.ChannelPost", b =>
+            modelBuilder.Entity("KP.BackEnd.Core.Models.ChannelPost", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.Supervisor", "Creator")
+                    b.HasOne("KP.BackEnd.Core.Models.Supervisor", "Creator")
                         .WithMany()
-                        .HasForeignKey("StudentId")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Comment", b =>
+                {
+                    b.HasOne("KP.BackEnd.Core.Models.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Student", b =>
+                {
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser", "Identity")
+                        .WithOne()
+                        .HasForeignKey("KP.BackEnd.Core.Models.Student", "Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KP.BackEnd.Core.Models.Supervisor", b =>
+                {
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser", "Identity")
+                        .WithOne()
+                        .HasForeignKey("KP.BackEnd.Core.Models.Supervisor", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.ApplicationRole")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -310,7 +349,7 @@ namespace KP.BackEnd.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.ApplicationUser")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -318,7 +357,7 @@ namespace KP.BackEnd.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.ApplicationUser")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -326,12 +365,12 @@ namespace KP.BackEnd.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.ApplicationRole")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("KP.BackEnd.Models.ApplicationUser")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -339,7 +378,7 @@ namespace KP.BackEnd.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("KP.BackEnd.Models.ApplicationUser")
+                    b.HasOne("KP.BackEnd.Core.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
