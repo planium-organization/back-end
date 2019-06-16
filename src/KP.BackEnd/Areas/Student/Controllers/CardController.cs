@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KP.BackEnd.Areas.Shared.DTOs.Card;
-using KP.BackEnd.Areas.Student.DTOs.Card;
-using KP.BackEnd.Data;
-using KP.BackEnd.Repositories;
+using KP.BackEnd.Core;
+using KP.BackEnd.Core.DTOs.Shared.Card;
+using KP.BackEnd.Core.DTOs.Sturdent.Card;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
@@ -18,18 +16,18 @@ namespace KP.BackEnd.Areas.Student.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private readonly CardRepository _cardRepository;
-
-        public CardController(CardRepository cardRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        
+        public CardController(IUnitOfWork unitOfWork)
         {
-            _cardRepository = cardRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet("{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetAll(DateTime date, int range)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var cards = await _cardRepository.GetRange(userId, date, range);
+            var cards = await _unitOfWork.Cards.GetRange(userId, date, range);
 
             var cardDtos = cards.Select(c => new CardGetDto(c, userId));
             
@@ -40,7 +38,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         public async Task<ActionResult<CardGetDto>> Get(Guid id)
         {
             var userId = Guid.Parse(User.Identity.Name);
-            var card = await _cardRepository.Find(userId, id);
+            var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
             
@@ -57,8 +55,9 @@ namespace KP.BackEnd.Areas.Student.Controllers
             var userId = Guid.Parse(User.Identity.Name);
             var card = cardDto.ToCard(userId);
 
-            await _cardRepository.Add(card);
-                
+            await _unitOfWork.Cards.Add(card);
+            await _unitOfWork.Complete();
+            
             return CreatedAtAction(nameof(Get), new CardGetDto(card, userId));
         }
         
@@ -67,7 +66,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         {
             var userId = Guid.Parse(User.Identity.Name);
 
-            var card = await _cardRepository.Find(userId, id);
+            var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
 
@@ -77,7 +76,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
             // TODO user automapper for general purpose editing
             card.Status = cardPatchDto.Status;
 
-            await _cardRepository.SaveChanges();
+            await _unitOfWork.Complete();
 
             return Ok();
         }
