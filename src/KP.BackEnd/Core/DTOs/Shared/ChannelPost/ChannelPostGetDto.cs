@@ -10,38 +10,34 @@ namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
         private byte[] _image;
         private Guid _creatorId;
 
-        public Guid Id {
+        public Guid Id
+        {
             get => _id;
             set => _id = value;
         }
 
-        public DateTime CreationTime {
+        public DateTime CreationTime 
+        {
             get => _creationTime;
             set => _creationTime = value;
         }
 
-        public string Text {
+        public string Text
+        {
             get => _text;
             set => _text = value;
         }
 
-        public byte[] Image {
+        public byte[] Image 
+        {
             get => _image;
             set => _image = value;
         }
 
-        public Guid CreatorId {
+        public Guid CreatorId 
+        {
             get => _creatorId;
             set => _creatorId = value;
-        }
-
-        public ChannelPostGetDto(Core.Models.ChannelPost channelPost)
-        {
-            Id = channelPost.Id;
-            Text = channelPost.Text;
-            Image = channelPost.Image;
-            CreatorId = channelPost.CreatorId;
-            CreationTime = channelPost.CreationTime;
         }
     }
 }

@@ -14,22 +14,25 @@ namespace KP.BackEnd.Core.Models
             set => _id = value;
         }
 
-        public ApplicationUser Identity {
+        public ApplicationUser Identity 
+        {
             get => _identity;
             set => _identity = value;
         }
 
-//        public Guid IdentityId { get; set; }
-        public string Major {
+        public string Major 
+        {
             get => _major;
             set => _major = value;
         }
 
-        public string SchoolName {
+        public string SchoolName 
+        {
             get => _schoolName;
             set => _schoolName = value;
         }
 
+//        public Guid IdentityId { get; set; }
 //        public SchClass SchClass { get; set; }
     }
 }

@@ -7,7 +7,8 @@ namespace KP.BackEnd.Core.Models
     {
         private string _description;
 
-        public string Description {
+        public string Description 
+        {
             get => _description;
             set => _description = value;
         }

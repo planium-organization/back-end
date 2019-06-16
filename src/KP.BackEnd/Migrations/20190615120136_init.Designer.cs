@@ -3,15 +3,17 @@ using System;
 using KP.BackEnd.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace KP.BackEnd.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190615120136_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,13 +100,13 @@ namespace KP.BackEnd.Migrations
                         {
                             Id = new Guid("bbbb1111-1111-1111-1111-111111111111"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "711e2a27-dd2e-48b8-b7b4-5cb77a0ea28b",
+                            ConcurrencyStamp = "13307c1c-cdcb-4fec-928d-3f44ebd9b639",
                             Email = "supervisor@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERVISOR@GMAIL.COM",
                             NormalizedUserName = "SUPERVISOR@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/pxMrWTcIV3FGzvjQFlAFtsW2HUH2wbvb536uufyDFskflnRLk+PbSRC0kRfXRSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEErxCpbTxFcUD0yfCpKftptYKZSsJ65xM2QMkHZKCrrJ67B5QzYAbe5ueDCz4u3Leg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -114,13 +116,13 @@ namespace KP.BackEnd.Migrations
                         {
                             Id = new Guid("bbbb2222-1111-1111-1111-111111111111"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a6360f2-da1b-439f-b80e-b00e07758e1a",
+                            ConcurrencyStamp = "f257caa1-794a-41b6-bc2d-c39b50ed22fe",
                             Email = "student@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT@GMAIL.COM",
                             NormalizedUserName = "STUDENT@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBPoAnffbGMW4rJjYOM9cpylxJJEFRIJMagum9Kx+Q4U3OjpOuCuUHyaNux2tMukzw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAmqQzS030ogVZD1+CPKtv0GvI+cAglzpxSPP4RaCTcmrX8XIjhq3920JcdChw+dnw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -132,8 +134,6 @@ namespace KP.BackEnd.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("CourseId");
 
                     b.Property<string>("Description");
 
@@ -151,39 +151,32 @@ namespace KP.BackEnd.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
-
                     b.ToTable("Cards");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111111"),
-                            CourseId = new Guid("eeee1111-1111-1111-1111-111111111112"),
-                            Description = "supervisor 1",
+                            Description = "for supervisor 1",
                             DueDate = new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 1, 11, 11, 0),
                             Status = 0,
-                            StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111"),
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111")
+                            StudentId = new Guid("bbbb1111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111112"),
-                            CourseId = new Guid("eeee1111-1111-1111-1111-111111111111"),
-                            Description = "supervisor 2",
-                            DueDate = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "for supervisor 2",
+                            DueDate = new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 2, 11, 11, 0),
                             Status = 1,
-                            StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111"),
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111")
+                            StudentId = new Guid("bbbb1111-1111-1111-1111-111111111111")
                         },
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111113"),
-                            CourseId = new Guid("eeee1111-1111-1111-1111-111111111112"),
-                            Description = "student 1",
-                            DueDate = new DateTime(2018, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "for student 1",
+                            DueDate = new DateTime(2018, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 1, 11, 11, 0),
                             Status = 0,
                             StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111")
@@ -191,9 +184,8 @@ namespace KP.BackEnd.Migrations
                         new
                         {
                             Id = new Guid("cccc1111-1111-1111-1111-111111111114"),
-                            CourseId = new Guid("eeee1111-1111-1111-1111-111111111111"),
-                            Description = "student 2",
-                            DueDate = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "for student 2",
+                            DueDate = new DateTime(2018, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Duration = new TimeSpan(0, 1, 11, 11, 0),
                             Status = 0,
                             StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111")
@@ -243,8 +235,6 @@ namespace KP.BackEnd.Migrations
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<Guid>("StudentId");
 
                     b.Property<Guid>("SupervisorId");
@@ -257,54 +247,6 @@ namespace KP.BackEnd.Migrations
                     b.HasIndex("SupervisorId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("dddd1111-1111-1111-1111-111111111111"),
-                            CreationTime = new DateTime(2019, 11, 10, 11, 11, 11, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111"),
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
-                            Text = "comment text 1"
-                        },
-                        new
-                        {
-                            Id = new Guid("dddd1111-1111-1111-1111-111111111112"),
-                            CreationTime = new DateTime(2019, 11, 12, 11, 11, 11, 0, DateTimeKind.Unspecified),
-                            Date = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StudentId = new Guid("bbbb2222-1111-1111-1111-111111111111"),
-                            SupervisorId = new Guid("bbbb1111-1111-1111-1111-111111111111"),
-                            Text = "comment text 2"
-                        });
-                });
-
-            modelBuilder.Entity("KP.BackEnd.Core.Models.Course", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Color");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("eeee1111-1111-1111-1111-111111111111"),
-                            Color = "#f4ee42",
-                            Title = "Math"
-                        },
-                        new
-                        {
-                            Id = new Guid("eeee1111-1111-1111-1111-111111111112"),
-                            Color = "#f44141",
-                            Title = "Theology"
-                        });
                 });
 
             modelBuilder.Entity("KP.BackEnd.Core.Models.Student", b =>
@@ -420,14 +362,6 @@ namespace KP.BackEnd.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("KP.BackEnd.Core.Models.Card", b =>
-                {
-                    b.HasOne("KP.BackEnd.Core.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("KP.BackEnd.Core.Models.ChannelPost", b =>

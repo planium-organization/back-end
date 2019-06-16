@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using KP.BackEnd.Core;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Core.Repositories;
 using KP.BackEnd.Persistence;
-using KP.BackEnd.Persistence.Data;
 using KP.BackEnd.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -37,7 +37,10 @@ namespace KP.BackEnd
                 ).BuildServiceProvider();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
+            services.AddAutoMapper(typeof(Startup));
 
             services.Configure<IdentityOptions>(options => {
                 //TODO
@@ -64,7 +67,7 @@ namespace KP.BackEnd
 
             services.AddCors(options => {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:4200")
+                    builder => builder.WithOrigins(@"*")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
@@ -88,26 +91,27 @@ namespace KP.BackEnd
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                    .Database.Migrate();
+            }
+            
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
-            else {
+            else 
+            {
                 //TODO
                 app.UseHsts();
             }
 
-//            app.UseCors("CorsPolicy");
-
+            app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc(
-                routes => {
-                    routes.MapRoute(
-                        name: "MyArea",
-                        template: "api/{area:exists}/{controller}/{action}");
-                }
-            );
+            app.UseMvc();
         }
     }
 }

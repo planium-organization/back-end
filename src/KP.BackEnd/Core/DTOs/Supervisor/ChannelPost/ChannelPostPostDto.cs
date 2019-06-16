@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KP.BackEnd.Core.DTOs.Supervisor.ChannelPost
 {
-    public class ChannelPostCreateDto
+    public class ChannelPostPostDto
     {
         private string _text;
         private byte[] _image;
@@ -24,16 +24,6 @@ namespace KP.BackEnd.Core.DTOs.Supervisor.ChannelPost
         public byte[] Image {
             get => _image;
             set => _image = value;
-        }
-
-        public Core.Models.ChannelPost ToChannelPost(Guid creatorId)
-        {
-            return new Core.Models.ChannelPost {
-                Text = Text,
-                Image = Image,
-                CreationTime = DateTime.Now,
-                CreatorId = creatorId,
-            };
         }
     }
 }

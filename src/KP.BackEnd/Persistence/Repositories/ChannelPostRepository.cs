@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Core.Repositories;
-using KP.BackEnd.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace KP.BackEnd.Persistence.Repositories
@@ -30,7 +29,7 @@ namespace KP.BackEnd.Persistence.Repositories
         public async Task<IEnumerable<ChannelPost>> GetRange(Guid classId,int page, int count)
         {
             return await _context.ChannelPosts
-                .Where(x=> x.ClassId ==classId)
+//                .Where(x=> x.ClassId ==classId) // TODO
                 .Skip(page * count)
                 .Take(count)
                 .ToListAsync();
