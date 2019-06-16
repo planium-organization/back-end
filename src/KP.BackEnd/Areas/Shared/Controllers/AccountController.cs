@@ -1,17 +1,18 @@
 using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Core.DTOs.Shared;
+using KP.BackEnd.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KP.BackEnd.Areas.Shared.Contorllers
+namespace KP.BackEnd.Areas.Shared.Controllers
 {
-    [ApiController, Route("api/[controller]/[action]")]
+    [ApiController, Route("api/shared/[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -21,7 +22,7 @@ namespace KP.BackEnd.Areas.Shared.Contorllers
         [IgnoreAntiforgeryToken]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            var newUser = new IdentityUser(registerDto.Email)
+            var newUser = new ApplicationUser(registerDto.Email)
             {
                 Email = registerDto.Email
             };

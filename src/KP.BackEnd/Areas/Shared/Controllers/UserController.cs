@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KP.BackEnd.Areas.Shared.Contorllers
+namespace KP.BackEnd.Areas.Shared.Controllers
 {
-    [ApiController, Route("api/[controller]/[action]"), Authorize]        
+    [ApiController, Route("api/shared/[controller]/[action]"), Authorize]        
     public class UserController : Controller
     {        
         [HttpGet]

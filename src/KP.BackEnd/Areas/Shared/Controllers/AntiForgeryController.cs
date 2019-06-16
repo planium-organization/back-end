@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KP.BackEnd.Areas.Shared.Contorllers
+namespace KP.BackEnd.Areas.Shared.Controllers
 {
     [ApiController]
     public class AntiForgeryController : Controller

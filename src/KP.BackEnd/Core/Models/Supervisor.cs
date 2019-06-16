@@ -7,12 +7,14 @@ namespace KP.BackEnd.Core.Models
         private Guid _id;
         private ApplicationUser _identity;
 
-        public Guid Id {
+        public Guid Id 
+        {
             get => _id;
             set => _id = value;
         }
 
-        public ApplicationUser Identity {
+        public ApplicationUser Identity
+        {
             get => _identity;
             set => _identity = value;
         }
