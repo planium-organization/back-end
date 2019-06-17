@@ -19,10 +19,11 @@ namespace KP.BackEnd.Persistence.Repositories
 
         public async Task<IEnumerable<Card>> GetRange(Guid studentId, DateTime date, int range)
         {
-            return await _context.Cards.Include(c => c.Course)
+            var allCards = await _context.Cards.Include(c => c.Course).ToListAsync();
+            return allCards
                 .Where(x => x.StudentId == studentId &&
-                            x.DueDate.Date.Subtract(date.Date).Days < range) //TODO can't generate sql
-                .ToListAsync();
+                            Math.Abs(x.DueDate.Date.Subtract(date.Date).Days) < range) //TODO can't generate sql
+                .ToList();
         }
 
         public async Task<IEnumerable<Card>> GetRange(Guid supervisorId, Guid studentId, DateTime date, int range)
@@ -30,7 +31,7 @@ namespace KP.BackEnd.Persistence.Repositories
             //TODO check supervisor id 
             return await _context.Cards.Include(c => c.Course)
                 .Where(x => x.StudentId == studentId &&
-                            x.DueDate.Date.Subtract(date.Date).Days < range) //TODO can't generate sql
+                            Math.Abs(x.DueDate.Date.Subtract(date.Date).Days) < range) //TODO can't generate sql
                 .ToListAsync();
         }
 
