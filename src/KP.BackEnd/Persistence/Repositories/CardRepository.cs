@@ -19,11 +19,10 @@ namespace KP.BackEnd.Persistence.Repositories
 
         public async Task<IEnumerable<Card>> GetRange(Guid studentId, DateTime date, int range)
         {
-            var allCards = await _context.Cards.Include(c => c.Course).ToListAsync();
-            return allCards
+            return await _context.Cards.Include(c => c.Course)
                 .Where(x => x.StudentId == studentId &&
                             Math.Abs(x.DueDate.Date.Subtract(date.Date).Days) < range) //TODO can't generate sql
-                .ToList();
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Card>> GetRange(Guid supervisorId, Guid studentId, DateTime date, int range)
