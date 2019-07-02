@@ -107,7 +107,7 @@ namespace KP.BackEnd
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
+            // app.UseCors("CorsPolicy");
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc();
