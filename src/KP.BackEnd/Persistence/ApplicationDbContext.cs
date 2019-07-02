@@ -10,6 +10,7 @@ namespace KP.BackEnd.Persistence
     {
         private DbSet<Card> _cards;
         private DbSet<Course> _courses;
+        private DbSet<Comment> _comments;
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -22,6 +23,7 @@ namespace KP.BackEnd.Persistence
             builder.ApplyConfiguration(new CourseConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new CardConfiguration());
+            builder.ApplyConfiguration(new CommentConfiguration());
         }
 
         public DbSet<Course> Courses
@@ -34,6 +36,12 @@ namespace KP.BackEnd.Persistence
         {
             get => _cards;
             set => _cards = value;
+        }
+
+        public DbSet<Comment> Comments 
+        {
+            get => _comments;
+            set => _comments = value;
         }
     }
 }
