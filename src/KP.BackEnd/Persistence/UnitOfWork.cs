@@ -10,16 +10,19 @@ namespace KP.BackEnd.Persistence
         public ICardRepository Cards { get; private set; }
         public  ICommentRepository Comments { get; private set; }
         public  ISchoolClassRepository SchoolClasses { get; private set; }
+        public  IChannelPostRepository ChannelPosts { get; private set; }
         
         public UnitOfWork(ApplicationDbContext context,
             ICardRepository cardRepository,
             ICommentRepository commentRepository,
-            ISchoolClassRepository schoolClassRepository)
+            ISchoolClassRepository schoolClassRepository,
+            IChannelPostRepository channelPostRepository)
         {
             _context = context;
             
             Cards = cardRepository;
             Comments = commentRepository;
+            ChannelPosts = channelPostRepository;
             SchoolClasses = schoolClassRepository;
         }
 
