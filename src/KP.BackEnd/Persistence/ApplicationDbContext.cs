@@ -27,6 +27,7 @@ namespace KP.BackEnd.Persistence
             builder.ApplyConfiguration(new CardConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new SchoolClassConfiguration());
+            builder.ApplyConfiguration(new ChannelPostConfiguration());
         }
 
         public DbSet<ChannelPost> ChannelPosts
