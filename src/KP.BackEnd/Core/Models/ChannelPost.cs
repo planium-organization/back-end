@@ -9,9 +9,9 @@ namespace KP.BackEnd.Core.Models
         private DateTime _creationTime;
         private string _text;
         private byte[] _image;
-//        private Supervisor _creator;
         private Guid _creatorId;
-//        private Guid _classId;
+        private Guid _schoolClassId;
+//        private Supervisor _creator;//todo
 
         public Guid Id 
         {
@@ -50,10 +50,10 @@ namespace KP.BackEnd.Core.Models
             set => _creatorId = value;
         }
 
-//        public Guid ClassId
-// {
-//            get => _classId;
-//            set => _classId = value;
-//        } // TODO
+        public Guid SchoolClassId
+ {
+            get => _schoolClassId;
+            set => _schoolClassId = value;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace KP.BackEnd.Core.Models
@@ -8,6 +9,13 @@ namespace KP.BackEnd.Core.Models
         private Guid _id;
         private string _name;
         private string _schoolName;
+        private IEnumerable<ChannelPost> _channelPosts;
+
+        public IEnumerable<ChannelPost> ChannelPosts
+        {
+            get => _channelPosts;
+            set => _channelPosts = value;
+        }
 
         public string SchoolName
         {

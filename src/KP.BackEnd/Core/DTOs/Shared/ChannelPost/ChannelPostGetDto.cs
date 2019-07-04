@@ -9,6 +9,13 @@ namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
         private string _text;
         private byte[] _image;
         private Guid _creatorId;
+        private Guid _schoolClassId;
+
+        public Guid SchoolClassId
+        {
+            get => _schoolClassId;
+            set => _schoolClassId = value;
+        }
 
         public Guid Id
         {

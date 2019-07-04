@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using KP.BackEnd.Core.DTOs.Shared.ChannelPost;
 
 namespace KP.BackEnd.Core.DTOs.Supervisor.SchoolClass
 {
@@ -7,6 +9,13 @@ namespace KP.BackEnd.Core.DTOs.Supervisor.SchoolClass
         private Guid _id;
         private string _name;
         private string _schoolName;
+        private IEnumerable<ChannelPostGetDto> _channelPosts;
+
+        public IEnumerable<ChannelPostGetDto> ChannelPosts
+        {
+            get => _channelPosts;
+            set => _channelPosts = value;
+        }
 
         public string SchoolName
         {
