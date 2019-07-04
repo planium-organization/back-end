@@ -21,7 +21,8 @@ namespace KP.BackEnd.Persistence.Repositories
         {
             return await _context.Cards.Include(c => c.Course)
                 .Where(x => x.StudentId == studentId &&
-                            Math.Abs(x.DueDate.Date.Subtract(date.Date).Days) < range) //TODO can't generate sql
+                            x.DueDate >= date &&
+                            x.DueDate <= date.AddDays(range - 1))
                 .ToListAsync();
         }
 
@@ -30,7 +31,8 @@ namespace KP.BackEnd.Persistence.Repositories
             //TODO check supervisor id 
             return await _context.Cards.Include(c => c.Course)
                 .Where(x => x.StudentId == studentId &&
-                            Math.Abs(x.DueDate.Date.Subtract(date.Date).Days) < range) //TODO can't generate sql
+                            x.DueDate >= date &&
+                            x.DueDate <= date.AddDays(range - 1))
                 .ToListAsync();
         }
 

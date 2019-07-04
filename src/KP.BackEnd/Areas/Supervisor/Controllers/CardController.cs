@@ -60,6 +60,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var card = _mapper.Map<Card>(cardDto);
             card.Status = CardStatus.Todo;
             card.SupervisorId = userId;
+            card.StudentId = ApplicationUserConfiguration.StudentIdTmp;
 
             await _unitOfWork.Cards.Add(card);
             await _unitOfWork.Complete();

@@ -64,6 +64,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
             var userId = ApplicationUserConfiguration.StudentIdTmp;
             var card = _mapper.Map<Card>(cardDto);
             card.Status = CardStatus.Todo;
+            card.StudentId = userId;
             
             await _unitOfWork.Cards.Add(card);
             await _unitOfWork.Complete();
