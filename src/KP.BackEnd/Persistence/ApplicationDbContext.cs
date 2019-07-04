@@ -11,6 +11,8 @@ namespace KP.BackEnd.Persistence
         private DbSet<Card> _cards;
         private DbSet<Course> _courses;
         private DbSet<Comment> _comments;
+        private DbSet<Student> _students;
+        private DbSet<Supervisor> _supervisors;
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -22,6 +24,8 @@ namespace KP.BackEnd.Persistence
 
             builder.ApplyConfiguration(new CourseConfiguration());
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new StudentConfiguration());
+            builder.ApplyConfiguration(new SupervisorConfiguration());
             builder.ApplyConfiguration(new CardConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
         }
@@ -42,6 +46,18 @@ namespace KP.BackEnd.Persistence
         {
             get => _comments;
             set => _comments = value;
+        }
+
+        public DbSet<Student> Students 
+        {
+            get => _students;
+            set => _students = value;
+        }
+
+        public DbSet<Supervisor> Supervisors
+        {
+            get => _supervisors;
+            set => _supervisors = value;
         }
     }
 }
