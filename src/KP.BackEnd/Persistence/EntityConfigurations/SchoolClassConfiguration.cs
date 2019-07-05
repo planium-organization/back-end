@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using KP.BackEnd.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,11 +11,28 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
         public void Configure(EntityTypeBuilder<SchoolClass> builder)
         {
             builder.HasData(new SchoolClass
-            {
-                Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111111"),
-                Name = "Mathematics",
-                SchoolName = "SchoolName1"
-            });
+                {
+                    Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111111"),
+                    Name = "ClassName1",
+                    SchoolName = "SchoolName1",
+                    ChannelPosts = new List<ChannelPost>()
+                    {
+                        new ChannelPost
+                        {
+                            Id = Guid.Parse("aaaa1111-1111-1111-1111-111111111114"),
+                            CreationTime = DateTime.Parse("2018-11-10T11:11:12"),
+                            CreatorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
+                            Text = "example text 4",
+                            Image = null
+                        }
+                    }
+                }, new SchoolClass
+                {
+                    Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111112"),
+                    Name = "classname2",
+                    SchoolName = "SchoolName2"
+                }
+            );
         }
     }
 }
