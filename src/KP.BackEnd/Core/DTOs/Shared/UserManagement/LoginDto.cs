@@ -1,4 +1,4 @@
-namespace KP.BackEnd.Core.DTOs.Shared
+namespace KP.BackEnd.Core.DTOs.Shared.UserManagement
 {
     public class LoginDto
     {
