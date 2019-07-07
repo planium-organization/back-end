@@ -23,7 +23,7 @@ namespace KP.BackEnd.Persistence.Repositories
 
         public async Task<ChannelPost> Find(Guid userId, Guid id)
         {
-            return await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id && p.CreatorId == userId);
+            return await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id);
         }
         
         public async Task<IEnumerable<ChannelPost>> GetRange(Guid classId,int page, int count)
