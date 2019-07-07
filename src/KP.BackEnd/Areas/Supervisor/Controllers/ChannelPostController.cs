@@ -9,6 +9,7 @@ using KP.BackEnd.Core.DTOs.Supervisor.ChannelPost;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Persistence.EntityConfigurations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
@@ -20,25 +21,28 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
         
-        public ChannelPostController(IUnitOfWork unitOfWork, IMapper mapper)
+        public ChannelPostController(IUnitOfWork unitOfWork, IMapper mapper,UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ChannelPostGetDto>> Get(Guid id)
-        {
-            var userId = ApplicationUserConfiguration.SupervisorIdTmp;
-            var channelPost = await _unitOfWork.ChannelPosts.Find(userId, id);
-            return Ok(_mapper.Map<ChannelPostGetDto>(channelPost)); // TODO
-        }
-        
+//        [HttpGet("{id}")]
+//        public async Task<ActionResult<ChannelPostGetDto>> Get(Guid id)
+//        {
+//            var userId = Guid.Parse(_userManager.GetUserId(User));
+//            
+//            var channelPost = await _unitOfWork.ChannelPosts.Find(userId,id);
+//            return Ok(_mapper.Map<ChannelPostGetDto>(channelPost)); // TODO
+//        }
+//        
         [HttpGet("{page}/{count}")]
         public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
-            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(classId,page, count);
+            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(classId, page, count);
             var channelPostDtos = channelPosts.Select(cp => _mapper.Map<ChannelPostGetDto>(cp)); // TODO
             return Ok(channelPostDtos);
         }
@@ -49,9 +53,10 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.SupervisorIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
+            
             var channelPost = _mapper.Map<ChannelPost>(dto); // TODO
-
+            
             await _unitOfWork.ChannelPosts.Add(channelPost);
             await _unitOfWork.Complete();
             
