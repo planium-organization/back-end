@@ -1,4 +1,6 @@
 using AutoMapper;
+using KP.BackEnd.Core.DTOs.Shared;
+using KP.BackEnd.Core.DTOs.Shared.SchoolClass;
 using KP.BackEnd.Core.Models;
 
 namespace KP.BackEnd.Core.AutoMapperProfiles
@@ -10,7 +12,7 @@ namespace KP.BackEnd.Core.AutoMapperProfiles
             #region Supervisor
 
             CreateMap<DTOs.Supervisor.SchoolClass.SchoolClassPostDto, SchoolClass>();
-            CreateMap<SchoolClass, DTOs.Supervisor.SchoolClass.SchoolClassGetDto>();
+            CreateMap<SchoolClass, SchoolClassGetDto>();
 
             #endregion
         }
