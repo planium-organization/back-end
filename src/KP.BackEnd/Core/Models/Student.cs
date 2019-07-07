@@ -8,6 +8,7 @@ namespace KP.BackEnd.Core.Models
         private ApplicationUser _identity;
         private string _major;
         private string _schoolName;
+        private Guid _schoolClassId;
 
         public Guid Id {
             get => _id;
@@ -32,7 +33,12 @@ namespace KP.BackEnd.Core.Models
             set => _schoolName = value;
         }
 
+        public Guid SchoolClassId
+        {
+            get => _schoolClassId;
+            set => _schoolClassId = value;
+        }
+
 //        public Guid IdentityId { get; set; }
-//        public SchClass SchClass { get; set; }
     }
 }
