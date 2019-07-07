@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Core.Repositories;
@@ -23,6 +25,11 @@ namespace KP.BackEnd.Persistence.Repositories
         public async Task Add(SchoolClass schoolClass)
         {
             await _context.SchoolClasses.AddAsync((schoolClass));
+        }
+
+        public async Task<IEnumerable<SchoolClass>> GetAll(Guid userId)
+        {
+            return await _context.SchoolClasses.Where(sc => sc.SupervisorId == userId).ToListAsync();
         }
     }
 }

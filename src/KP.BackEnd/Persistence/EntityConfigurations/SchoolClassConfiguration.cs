@@ -12,6 +12,7 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
         {
             //TODO
             builder.HasData(new SchoolClass
+<<<<<<< HEAD
                 {
                     Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111111"),
                     Name = "ClassName1",
@@ -33,6 +34,14 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
                     SchoolName = "SchoolName2"
                 }
             );
+=======
+            {
+                Id = Guid.Parse("cccccccc-1111-1111-1111-111111111111"),
+                SupervisorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
+                Name = "Mathematics",
+                SchoolName = "SchoolName1"
+            });
+>>>>>>> dev
         }
     }
 }
