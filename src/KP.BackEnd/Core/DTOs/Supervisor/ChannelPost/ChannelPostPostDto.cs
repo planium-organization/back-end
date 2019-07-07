@@ -9,21 +9,18 @@ namespace KP.BackEnd.Core.DTOs.Supervisor.ChannelPost
         private byte[] _image;
         private Guid _schoolClassId;
         
-        
         public Guid SchoolClassId 
         {
             get => _schoolClassId;
             set => _schoolClassId = value;
         }
 
-        [Required]
         public string Text 
         {
             get => _text;
             set => _text = value;
         }
 
-        [Required]
         public byte[] Image 
         {
             get => _image;

@@ -1,26 +1,33 @@
 using System;
+using KP.BackEnd.Core.Models;
 
 namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
 {
     public class ChannelPostGetDto
     {
         private Guid _id;
+        private Guid _schoolClassId;
+        private SchoolClass _schoolClass;
         private DateTime _creationTime;
         private string _text;
         private byte[] _image;
-        private Guid _creatorId;
-        private Guid _schoolClassId;
 
+        public Guid Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+        
         public Guid SchoolClassId
         {
             get => _schoolClassId;
             set => _schoolClassId = value;
         }
 
-        public Guid Id
+        public SchoolClass SchoolClass
         {
-            get => _id;
-            set => _id = value;
+            get => _schoolClass;
+            set => _schoolClass = value;
         }
 
         public DateTime CreationTime 
@@ -39,12 +46,6 @@ namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
         {
             get => _image;
             set => _image = value;
-        }
-
-        public Guid CreatorId 
-        {
-            get => _creatorId;
-            set => _creatorId = value;
         }
     }
 }
