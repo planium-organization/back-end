@@ -15,9 +15,9 @@ namespace KP.BackEnd.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<SchoolClass> Find(Guid id)
+        public async Task<SchoolClass> Find(Guid userId, Guid id)
         {
-            return await _context.SchoolClasses.FirstOrDefaultAsync(sc => sc.Id == id);
+            return await _context.SchoolClasses.FirstOrDefaultAsync(sc => sc.Id == id && sc.SupervisorId == userId);
         }
         
         public async Task Add(SchoolClass schoolClass)

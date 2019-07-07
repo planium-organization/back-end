@@ -6,10 +6,12 @@ using KP.BackEnd.Core.DTOs.Supervisor.SchoolClass;
 using KP.BackEnd.Core.DTOs.Supervisor.SchoolClass;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Persistence.EntityConfigurations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
+    [Authorize(Roles = "Supervisor")]
     [Route("api/supervisor/[controller]")]
     [ApiController]
     public class SchoolClassController : ControllerBase
@@ -25,9 +27,10 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SchoolClassPostDto>> Get(Guid id)
-        {
-//            var userId = ApplicationUserConfiguration.SupervisorIdTmp; 
-            var schoolClass = await _unitOfWork.SchoolClasses.Find(id);
+        { 
+            var userId = Guid.Parse(User.Identity.Name);
+            
+            var schoolClass = await _unitOfWork.SchoolClasses.Find(userId,id);
             
             return Ok(_mapper.Map<SchoolClassGetDto>(schoolClass)); // TODO
         }
