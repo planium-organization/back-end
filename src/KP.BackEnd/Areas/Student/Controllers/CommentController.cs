@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Student")]
     [Route("api/student/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -29,7 +29,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpGet("{date}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(DateTime date, int page, int count)
         {
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var supervisorId= ApplicationUserConfiguration.SupervisorIdTmp;
             var comments = await _unitOfWork.Comments.GetRange(supervisorId,userId , date, page, count);
 

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Student")]
     [Route("api/student/[controller]")]
     [ApiController]
     public class CardController : ControllerBase
@@ -32,8 +32,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpGet("{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetRangeByDate(string date, int range)
         {
-            // var userId = Guid.Parse(User.Identity.Name);
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var cards = await _unitOfWork.Cards.GetRange(userId, DateTime.Parse(date), range);
 
             var cardDtos = new List<CardGetDto>();
@@ -61,7 +60,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var card = _mapper.Map<Card>(cardDto);
             card.Status = CardStatus.Todo;
             card.StudentId = userId;
@@ -83,7 +82,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Edit(Guid id, CardPutDto cardPut)
         {
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
@@ -131,7 +130,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(Guid id)
         {
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found!");

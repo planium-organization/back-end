@@ -10,6 +10,7 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<SchoolClass> builder)
         {
+            //TODO
             builder.HasData(new SchoolClass
                 {
                     Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111111"),
@@ -21,7 +22,6 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
                         {
                             Id = Guid.Parse("aaaa1111-1111-1111-1111-111111111114"),
                             CreationTime = DateTime.Parse("2018-11-10T11:11:12"),
-                            CreatorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
                             Text = "example text 4",
                             Image = null
                         }

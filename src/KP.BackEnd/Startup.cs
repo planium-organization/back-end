@@ -37,6 +37,7 @@ namespace KP.BackEnd
                 ).BuildServiceProvider();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             

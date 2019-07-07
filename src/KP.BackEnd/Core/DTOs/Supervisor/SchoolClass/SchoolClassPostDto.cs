@@ -6,8 +6,6 @@ namespace KP.BackEnd.Core.DTOs.Supervisor.SchoolClass
     {
         private string _name;
         private string _schoolName;
-
-        [Required]
         public string SchoolName
         {
             get => _schoolName;
