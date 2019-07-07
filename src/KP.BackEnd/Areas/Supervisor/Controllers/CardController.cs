@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Supervisor")]
     [Route("api/supervisor/[controller]")]
     [ApiController]
     public class CardController : ControllerBase

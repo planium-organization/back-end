@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Student")]
     [Route("api/student/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
