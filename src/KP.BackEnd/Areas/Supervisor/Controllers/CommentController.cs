@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Supervisor")]
     [Route("api/supervisor/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -30,7 +30,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         [HttpGet("{studentId}/{date}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(Guid studentId, DateTime date, int page, int count)
         {
-            var userId= ApplicationUserConfiguration.SupervisorIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             var comments = await _unitOfWork.Comments.GetRange(userId ,studentId, date, page, count);
 
             var commentDtos = comments.Select(c => _mapper.Map<CommentGetDto>(c));
@@ -44,7 +44,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.SupervisorIdTmp;
+            var userId = Guid.Parse(User.Identity.Name);
             
             var comment = _mapper.Map<Comment>(commentDto);
             comment.CreationTime = DateTime.Now;
