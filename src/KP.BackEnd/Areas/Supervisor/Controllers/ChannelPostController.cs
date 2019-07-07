@@ -60,7 +60,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             await _unitOfWork.ChannelPosts.Add(channelPost);
             await _unitOfWork.Complete();
             
-            return CreatedAtAction(nameof(Get), _mapper.Map<ChannelPostGetDto>(channelPost), null);
+            return CreatedAtAction(null, _mapper.Map<ChannelPostGetDto>(channelPost), null);
         }
     }
 }
