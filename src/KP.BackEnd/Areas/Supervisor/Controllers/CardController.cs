@@ -8,6 +8,7 @@ using KP.BackEnd.Core.DTOs.Supervisor.Card;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Persistence.EntityConfigurations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
@@ -19,17 +20,20 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CardController(IUnitOfWork unitOfWork, IMapper mapper)
+        public CardController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet("{studentId}/{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetRangeByDate(Guid studentId, string date, int range)
         {
-            var userId = Guid.Parse(User.Identity.Name);
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var cards = await _unitOfWork.Cards.GetRange(userId, studentId, DateTime.Parse(date), range);
 
             var cardDtos = new List<CardGetDto>();
@@ -53,10 +57,11 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CardPostDto cardDto)
         {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = Guid.Parse(User.Identity.Name);
             var card = _mapper.Map<Card>(cardDto);
             card.Status = CardStatus.Todo;
             card.SupervisorId = userId;
@@ -79,7 +84,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         [HttpPut("{studentId}/{id}")]
         public async Task<ActionResult> Edit(Guid studentId, Guid id, CardPutDto cardPut)
         {
-            var userId = Guid.Parse(User.Identity.Name);
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var card = await _unitOfWork.Cards.Find(userId, studentId, id);
             if (card == null)
                 return NotFound("card not found");
@@ -124,7 +130,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         [HttpDelete("{studentId}/{id}")]
         public async Task<ActionResult> Remove(Guid studentId, Guid id)
         {
-            var userId = Guid.Parse(User.Identity.Name);
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var card = await _unitOfWork.Cards.Find(userId, studentId, id);
             if (card == null)
                 return NotFound("card not found!");
