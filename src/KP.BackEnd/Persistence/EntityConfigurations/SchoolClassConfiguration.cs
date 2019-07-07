@@ -11,7 +11,7 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
         {
             builder.HasData(new SchoolClass
             {
-                Id = Guid.Parse("yyyy1111-1111-1111-1111-111111111111"),
+                Id = Guid.Parse("cccccccc-1111-1111-1111-111111111111"),
                 SupervisorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
                 Name = "Mathematics",
                 SchoolName = "SchoolName1"
