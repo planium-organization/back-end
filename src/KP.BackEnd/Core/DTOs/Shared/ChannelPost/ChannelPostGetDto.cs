@@ -1,4 +1,5 @@
 using System;
+using KP.BackEnd.Core.DTOs.Shared.SchoolClass;
 using KP.BackEnd.Core.Models;
 
 namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
@@ -7,7 +8,7 @@ namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
     {
         private Guid _id;
         private Guid _schoolClassId;
-        private SchoolClass _schoolClass;
+        private SchoolClassGetDto _schoolClassGetDto;
         private DateTime _creationTime;
         private string _text;
         private byte[] _image;
@@ -24,10 +25,10 @@ namespace KP.BackEnd.Core.DTOs.Shared.ChannelPost
             set => _schoolClassId = value;
         }
 
-        public SchoolClass SchoolClass
+        public SchoolClassGetDto SchoolClassGetDto
         {
-            get => _schoolClass;
-            set => _schoolClass = value;
+            get => _schoolClassGetDto;
+            set => _schoolClassGetDto = value;
         }
 
         public DateTime CreationTime 
