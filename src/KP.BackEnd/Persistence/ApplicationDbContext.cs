@@ -12,12 +12,14 @@ namespace KP.BackEnd.Persistence
         private DbSet<Card> _cards;
         private DbSet<Course> _courses;
         private DbSet<Comment> _comments;
+        private DbSet<SchoolClass> _schoolClasses;
         private DbSet<Student> _students;
         private DbSet<Supervisor> _supervisors;
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
-        {}
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,6 +33,7 @@ namespace KP.BackEnd.Persistence
             builder.ApplyConfiguration(new SupervisorConfiguration());
             builder.ApplyConfiguration(new CardConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
+            builder.ApplyConfiguration(new SchoolClassConfiguration());
         }
 
         public DbSet<Course> Courses
@@ -39,19 +42,25 @@ namespace KP.BackEnd.Persistence
             set => _courses = value;
         }
 
-        public DbSet<Card> Cards 
+        public DbSet<Card> Cards
         {
             get => _cards;
             set => _cards = value;
         }
 
-        public DbSet<Comment> Comments 
+        public DbSet<Comment> Comments
         {
             get => _comments;
             set => _comments = value;
         }
 
-        public DbSet<Student> Students 
+        public DbSet<SchoolClass> SchoolClasses
+        {
+            get => _schoolClasses;
+            set => _schoolClasses = value;
+        }
+
+        public DbSet<Student> Students
         {
             get => _students;
             set => _students = value;
