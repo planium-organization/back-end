@@ -38,8 +38,10 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.SupervisorIdTmp;
-            var schoolClass= _mapper.Map<SchoolClass>(dto); // TODO
+            var userId = Guid.Parse(User.Identity.Name);
+
+            var schoolClass = _mapper.Map<SchoolClass>(dto);
+            schoolClass.SupervisorId = userId;
 
             await _unitOfWork.SchoolClasses.Add(schoolClass);
             await _unitOfWork.Complete();
