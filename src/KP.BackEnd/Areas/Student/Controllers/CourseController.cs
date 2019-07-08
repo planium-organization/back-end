@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -44,5 +45,16 @@ namespace KP.BackEnd.Areas.Student.Controllers
             var courseGetDto = _mapper.Map<CourseGetDto>(course);
             return Ok(courseGetDto);
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CourseGetDto>>> GetAll()
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            var student = await _unitOfWork.Students.Find(userId);
+            var courses = _mapper.Map<IEnumerable<CourseGetDto>>(student.Courses);
+            return Ok(courses);
+        }
+
+        
     }
 }
