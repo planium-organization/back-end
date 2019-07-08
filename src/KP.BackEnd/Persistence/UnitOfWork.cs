@@ -14,6 +14,7 @@ namespace KP.BackEnd.Persistence
         public IStudentRepository Students { get; private set; }
         public ISupervisorRepository Supervisors { get; private set; }
         
+
         public UnitOfWork(ApplicationDbContext context,
             ICardRepository cardRepository,
             ICommentRepository commentRepository,
