@@ -88,6 +88,8 @@ namespace KP.BackEnd
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IChannelPostRepository, ChannelPostRepository>();
             services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ISupervisorRepository, SupervisorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
