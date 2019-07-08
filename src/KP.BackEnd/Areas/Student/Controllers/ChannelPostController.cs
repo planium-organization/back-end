@@ -45,8 +45,8 @@ namespace KP.BackEnd.Areas.Student.Controllers
         {
 //            TODO get posts via student/user id (finding class id) 
             var userId = Guid.Parse(_userManager.GetUserId(User));
-            
-            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(classId, page, count);
+
+            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(userId, classId, page, count);//todo 
             
             var channelPostGetDtos = channelPosts.Select<ChannelPost,ChannelPostGetDto>(p => _mapper.Map<ChannelPostGetDto>(p)).ToList(); // TODO
             
