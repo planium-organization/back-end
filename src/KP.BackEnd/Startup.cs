@@ -31,9 +31,10 @@ namespace KP.BackEnd
         {
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseNpgsql(
-                        Configuration.GetConnectionString("DefaultConnection")
-                    )
+                    options.UseLazyLoadingProxies()
+                        .UseNpgsql(
+                            Configuration.GetConnectionString("DefaultConnection")
+                        )
                 ).BuildServiceProvider();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -86,7 +87,10 @@ namespace KP.BackEnd
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IChannelPostRepository, ChannelPostRepository>();
             services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<ISupervisorRepository, SupervisorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

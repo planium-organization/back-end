@@ -13,6 +13,7 @@ namespace KP.BackEnd.Persistence
         private DbSet<Course> _courses;
         private DbSet<Comment> _comments;
         private DbSet<SchoolClass> _schoolClasses;
+        private DbSet<ChannelPost> _channelPosts;
         private DbSet<Student> _students;
         private DbSet<Supervisor> _supervisors;
 
@@ -34,6 +35,13 @@ namespace KP.BackEnd.Persistence
             builder.ApplyConfiguration(new CardConfiguration());
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new SchoolClassConfiguration());
+            builder.ApplyConfiguration(new ChannelPostConfiguration());
+        }
+
+        public DbSet<ChannelPost> ChannelPosts
+        {
+            get => _channelPosts;
+            set => _channelPosts = value;
         }
 
         public DbSet<Course> Courses

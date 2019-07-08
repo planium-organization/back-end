@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace KP.BackEnd.Core.Models
 {
@@ -6,6 +7,7 @@ namespace KP.BackEnd.Core.Models
     {
         private Guid _id;
         private ApplicationUser _identity;
+        private IEnumerable<Course> _courses;
 
         public Guid Id 
         {
@@ -13,10 +15,16 @@ namespace KP.BackEnd.Core.Models
             set => _id = value;
         }
 
-        public ApplicationUser Identity
+        public virtual ApplicationUser Identity
         {
             get => _identity;
             set => _identity = value;
+        }
+
+        public virtual IEnumerable<Course> Courses
+        {
+            get => _courses;
+            set => _courses = value;
         }
 
 //        public Guid IdentityId { get; set; }
