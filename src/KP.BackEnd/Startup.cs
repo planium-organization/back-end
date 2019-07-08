@@ -86,6 +86,7 @@ namespace KP.BackEnd
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICardRepository, CardRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IChannelPostRepository, ChannelPostRepository>();
             services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
         }
 
