@@ -7,6 +7,6 @@ namespace KP.BackEnd.Core.Models
     {
         public Guid Id { get; set; }
         public string Title { get; set;}
-        public string Color { get; set; }   
+        public string Color { get; set; }
     }
 }

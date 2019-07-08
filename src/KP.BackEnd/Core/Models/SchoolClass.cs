@@ -36,7 +36,7 @@ namespace KP.BackEnd.Core.Models
             set => _name = value;
         }
         
-        public IEnumerable<ChannelPost> ChannelPosts
+        public virtual IEnumerable<ChannelPost> ChannelPosts
         {
             get => _channelPosts;
             set => _channelPosts = value;
