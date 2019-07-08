@@ -39,7 +39,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 //            return Ok(_mapper.Map<ChannelPostGetDto>(channelPost)); 
 //        }
 //        
-        [HttpGet("{page}/{count}")]
+        [HttpGet("{classId}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
             var userId = Guid.Parse(_userManager.GetUserId(User));
