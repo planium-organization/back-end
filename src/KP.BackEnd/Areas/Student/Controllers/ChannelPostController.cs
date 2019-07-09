@@ -41,14 +41,16 @@ namespace KP.BackEnd.Areas.Student.Controllers
 //        }
 
         [HttpGet("{page}/{count}")]
-        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
+        public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(int page, int count)
         {
-//            TODO get posts via student/user id (finding class id) 
             var userId = Guid.Parse(_userManager.GetUserId(User));
+            var student = await _unitOfWork.Students.Find(userId);
+            var sClass = student.SchoolClass;
+            if (sClass == null)
+                return BadRequest("You have to join a class first");
             
-            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(classId, page, count);
-            
-            var channelPostGetDtos = channelPosts.Select<ChannelPost,ChannelPostGetDto>(p => _mapper.Map<ChannelPostGetDto>(p)).ToList(); // TODO
+            var channelPosts = sClass.ChannelPosts.Skip(page).Take(count).ToList();
+            var channelPostGetDtos = _mapper.Map<IEnumerable<ChannelPostGetDto>>(channelPosts);
             
             return Ok(channelPostGetDtos);
         }

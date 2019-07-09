@@ -17,9 +17,15 @@ namespace KP.BackEnd.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<Student> Find(Guid id)
+        public async Task<Student> Find(Guid studentId)
         {
-            return await _context.Students.FindAsync(id);
+            return await _context.Students.FindAsync(studentId);
+        }
+
+        public async Task<Student> FindBySupervisor(Guid supervisorId, Guid studentId)
+        {
+            return await _context.Students.FirstOrDefaultAsync(x =>
+                x.Id == studentId && x.SchoolClass.SupervisorId == supervisorId);
         }
 
         public async Task<IEnumerable<Student>> FindAll(Guid classId)

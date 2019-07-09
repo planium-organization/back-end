@@ -26,10 +26,11 @@ namespace KP.BackEnd.Persistence.Repositories
             return await _context.ChannelPosts.FirstOrDefaultAsync(p => p.Id == id);
         }
         
-        public async Task<IEnumerable<ChannelPost>> GetRange(Guid classId,int page, int count)
+        public async Task<IEnumerable<ChannelPost>> GetRange(Guid supervisorId, Guid schoolClassId, int page, int count)
         {
             return await _context.ChannelPosts
-//                .Where(x=> x.ClassId ==classId) // TODO
+                .Include(x => x.SchoolClass)
+                .Where(x=> x.SchoolClassId ==schoolClassId && x.SchoolClass.SupervisorId == supervisorId)
                 .Skip(page * count)
                 .Take(count)
                 .ToListAsync();

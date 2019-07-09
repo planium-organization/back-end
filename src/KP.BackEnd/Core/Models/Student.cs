@@ -10,6 +10,7 @@ namespace KP.BackEnd.Core.Models
         private string _major;
         private ICollection<Course> _courses;
         private SchoolClass _schoolClass;
+        private ICollection<Card> _cards;
 
         public Guid Id {
             get => _id;
@@ -38,6 +39,12 @@ namespace KP.BackEnd.Core.Models
         {
             get => _courses;
             set => _courses = value;
+        }
+
+        public virtual ICollection<Card> Cards
+        {
+            get => _cards;
+            set => _cards = value;
         }
 
 //        public Guid IdentityId { get; set; }

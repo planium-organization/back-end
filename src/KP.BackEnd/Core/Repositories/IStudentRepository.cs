@@ -7,7 +7,8 @@ namespace KP.BackEnd.Core.Repositories
 {
     public interface IStudentRepository
     {
-        Task<Student> Find(Guid id);
         Task<IEnumerable<Student>> FindAll(Guid classId);
+        Task<Student> Find(Guid studentId);
+        Task<Student> FindBySupervisor(Guid supervisorId, Guid studentId);
     }
 }
