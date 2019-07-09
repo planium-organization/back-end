@@ -7,7 +7,7 @@ namespace KP.BackEnd.Core.Models
     {
         private Guid _id;
         private ApplicationUser _identity;
-        private IEnumerable<Course> _courses;
+        private ICollection<Course> _courses;
 
         public Guid Id 
         {
@@ -21,7 +21,7 @@ namespace KP.BackEnd.Core.Models
             set => _identity = value;
         }
 
-        public virtual IEnumerable<Course> Courses
+        public virtual ICollection<Course> Courses
         {
             get => _courses;
             set => _courses = value;
