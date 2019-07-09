@@ -43,7 +43,7 @@ namespace KP.BackEnd.Core.Models
             set => _schoolClassId = value;
         }
         
-        public SchoolClass SchoolClass
+        public virtual SchoolClass SchoolClass
         {
             get => _schoolClass;
             set => _schoolClass = value;

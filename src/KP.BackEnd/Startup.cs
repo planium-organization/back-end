@@ -31,9 +31,10 @@ namespace KP.BackEnd
         {
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseNpgsql(
-                        Configuration.GetConnectionString("DefaultConnection")
-                    )
+                    options.UseLazyLoadingProxies()
+                        .UseNpgsql(
+                            Configuration.GetConnectionString("DefaultConnection")
+                        )
                 ).BuildServiceProvider();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()

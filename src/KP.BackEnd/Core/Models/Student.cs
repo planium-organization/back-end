@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace KP.BackEnd.Core.Models
 {
@@ -7,15 +8,16 @@ namespace KP.BackEnd.Core.Models
         private Guid _id;
         private ApplicationUser _identity;
         private string _major;
-        private string _schoolName;
-        private Guid _schoolClassId;
+        private ICollection<Course> _courses;
+        private SchoolClass _schoolClass;
+        private ICollection<Card> _cards;
 
         public Guid Id {
             get => _id;
             set => _id = value;
         }
 
-        public ApplicationUser Identity 
+        public virtual ApplicationUser Identity 
         {
             get => _identity;
             set => _identity = value;
@@ -27,16 +29,22 @@ namespace KP.BackEnd.Core.Models
             set => _major = value;
         }
 
-        public string SchoolName 
+        public virtual SchoolClass SchoolClass
         {
-            get => _schoolName;
-            set => _schoolName = value;
+            get => _schoolClass;
+            set => _schoolClass = value;
         }
 
-        public Guid SchoolClassId
+        public virtual ICollection<Course> Courses
         {
-            get => _schoolClassId;
-            set => _schoolClassId = value;
+            get => _courses;
+            set => _courses = value;
+        }
+
+        public virtual ICollection<Card> Cards
+        {
+            get => _cards;
+            set => _cards = value;
         }
 
 //        public Guid IdentityId { get; set; }
