@@ -11,6 +11,7 @@ namespace KP.BackEnd.Core.Models
         private string _name;
         private string _schoolName;
         private IEnumerable<ChannelPost> _channelPosts;
+        private string _token;
 
         public Guid Id
         {
@@ -36,10 +37,16 @@ namespace KP.BackEnd.Core.Models
             set => _name = value;
         }
         
-        public IEnumerable<ChannelPost> ChannelPosts
+        public virtual IEnumerable<ChannelPost> ChannelPosts
         {
             get => _channelPosts;
             set => _channelPosts = value;
+        }
+
+        public string Token
+        {
+            get => _token;
+            set => _token = value;
         }
     }
 }

@@ -31,5 +31,10 @@ namespace KP.BackEnd.Persistence.Repositories
         {
             return await _context.SchoolClasses.Where(sc => sc.SupervisorId == userId).ToListAsync();
         }
+
+        public async Task<SchoolClass> FindByToken(string token)
+        {
+            return await _context.SchoolClasses.FirstOrDefaultAsync(s => s.Token == token);
+        }
     }
 }

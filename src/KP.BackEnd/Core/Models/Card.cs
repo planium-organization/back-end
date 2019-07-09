@@ -22,7 +22,7 @@ namespace KP.BackEnd.Core.Models
             set => _courseId = value;
         }
 
-        public Course Course 
+        public virtual Course Course 
         {
             get => _course;
             set => _course = value;
