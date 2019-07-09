@@ -32,9 +32,11 @@ namespace KP.BackEnd.Areas.Shared.Controllers
             if (!roleExists)
                 return BadRequest("Role doesn't exist");
             
-            var newUser = new ApplicationUser(registerDto.Email)
+            var newUser = new ApplicationUser(registerDto.Username)
             {
-                Email = registerDto.Email
+                Email = registerDto.Email,
+                FirstName = registerDto.FirstName,
+                LastName = registerDto.LastName
             };
 
             var creationResult = await _userManager.CreateAsync(newUser, registerDto.Password);

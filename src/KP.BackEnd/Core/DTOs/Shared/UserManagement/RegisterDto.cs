@@ -7,6 +7,9 @@ namespace KP.BackEnd.Core.DTOs.Shared.UserManagement
         private string _email;
         private string _password;
         private string _role;
+        private string _username;
+        private string _lastName;
+        private string _firstName;
 
         [Required]
         public string Email
@@ -27,6 +30,25 @@ namespace KP.BackEnd.Core.DTOs.Shared.UserManagement
         {
             get => _role;
             set => _role = value;
+        }
+
+        [Required]
+        public string Username
+        {
+            get => _username;
+            set => _username = value;
+        }
+
+        public string FirstName
+        {
+            get => _firstName;
+            set => _firstName = value;
+        }
+
+        public string LastName
+        {
+            get => _lastName;
+            set => _lastName = value;
         }
     }
 }
