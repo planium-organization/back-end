@@ -36,7 +36,8 @@ namespace KP.BackEnd.Areas.Shared.Controllers
             {
                 Email = registerDto.Email,
                 FirstName = registerDto.FirstName,
-                LastName = registerDto.LastName
+                LastName = registerDto.LastName,
+                Image = registerDto.Image
             };
 
             var creationResult = await _userManager.CreateAsync(newUser, registerDto.Password);

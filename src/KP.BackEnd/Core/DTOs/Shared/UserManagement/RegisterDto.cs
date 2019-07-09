@@ -10,6 +10,7 @@ namespace KP.BackEnd.Core.DTOs.Shared.UserManagement
         private string _username;
         private string _lastName;
         private string _firstName;
+        private byte[] _image;
 
         [Required]
         public string Email
@@ -49,6 +50,12 @@ namespace KP.BackEnd.Core.DTOs.Shared.UserManagement
         {
             get => _lastName;
             set => _lastName = value;
+        }
+
+        public byte[] Image
+        {
+            get => _image;
+            set => _image = value;
         }
     }
 }
