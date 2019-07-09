@@ -32,7 +32,11 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         {
             var userId = Guid.Parse(_userManager.GetUserId(User));
 
-            var students = await _unitOfWork.SchoolClasses.GetAll(userId);
+            var schoolClass = await _unitOfWork.SchoolClasses.Find(userId, classId);
+            if(schoolClass == null)
+                return NotFound("Class not found");
+
+            var students = _unitOfWork.Students.FindAll(classId);
             var studentsDtos = _mapper.Map<IEnumerable<StudentGetDto>>(students);
             //TODO student's emails as username should be mapped also 
             return Ok(studentsDtos);
