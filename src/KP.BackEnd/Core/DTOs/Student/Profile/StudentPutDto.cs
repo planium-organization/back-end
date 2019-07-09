@@ -1,4 +1,4 @@
-namespace KP.BackEnd.Core.DTOs.Shared.Profile
+namespace KP.BackEnd.Core.DTOs.Student.Profile
 {
     public class StudentPutDto
     {

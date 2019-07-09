@@ -35,7 +35,6 @@ namespace KP.BackEnd.Core.DTOs.Student.Card
             set => _dueDate = value;
         }
 
-        [Required]
         public string Description 
         {
             get => _description;

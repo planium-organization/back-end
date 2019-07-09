@@ -10,7 +10,7 @@ namespace KP.BackEnd.Core.DTOs.Shared.Card
         private DateTime? _dueDate;
         private string _description;
         private DateTime? _startTime;
-        private CoursePostDto _course;//TODO COURSEPUTDTO
+        private CoursePostDto _course;
         private bool? _done;
 
         public bool? Done

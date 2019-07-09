@@ -44,7 +44,6 @@ namespace KP.BackEnd.Core.DTOs.Supervisor.Card
             set => _dueDate = value;
         }
 
-        [Required]
         public string Description 
         {
             get => _description;
