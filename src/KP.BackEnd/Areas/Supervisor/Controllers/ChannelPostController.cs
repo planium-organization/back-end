@@ -43,8 +43,13 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
             var userId = Guid.Parse(_userManager.GetUserId(User));
-
+            
+            var schoolClass = _unitOfWork.SchoolClasses.Find(userId, classId);
+            if (schoolClass == null)
+                return NotFound("Class not found!!");//Todo badrequest not authorized!
+            
             var channelPosts = await _unitOfWork.ChannelPosts.GetRange(userId, classId, page, count);
+            //var channelPosts=schoolClass.Channelpsots ,..........
             var channelPostDtos = channelPosts.Select(cp => _mapper.Map<ChannelPostGetDto>(cp)); 
             return Ok(channelPostDtos);
         }
@@ -56,8 +61,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
                 return BadRequest(ModelState);
 
             var userId = Guid.Parse(_userManager.GetUserId(User));
-            
-            var channelPost = _mapper.Map<ChannelPost>(dto); // TODO
+
+            var channelPost = _mapper.Map<ChannelPost>(dto);
             
             await _unitOfWork.ChannelPosts.Add(channelPost);
             await _unitOfWork.Complete();
