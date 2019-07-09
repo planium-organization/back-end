@@ -46,7 +46,5 @@ namespace KP.BackEnd.Core.Models
             get => _cards;
             set => _cards = value;
         }
-
-//        public Guid IdentityId { get; set; }
     }
 }
