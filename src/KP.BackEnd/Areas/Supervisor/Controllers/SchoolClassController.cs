@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using KP.BackEnd.Core;
+using KP.BackEnd.Core.DTOs.Shared.SchoolClass;
 using KP.BackEnd.Core.DTOs.Supervisor.SchoolClass;
 using KP.BackEnd.Core.Models;
 using Microsoft.AspNetCore.Authorization;

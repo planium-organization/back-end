@@ -1,6 +1,6 @@
 using System;
 
-namespace KP.BackEnd.Core.DTOs.Supervisor.SchoolClass
+namespace KP.BackEnd.Core.DTOs.Shared.SchoolClass
 {
     public class SchoolClassGetDto
     {
