@@ -68,12 +68,12 @@ namespace KP.BackEnd.Areas.Shared.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return NoContent();
-        }
+//        [HttpPost]
+//        public async Task<IActionResult> Logout()
+//        {
+//            await _signInManager.SignOutAsync();
+//            return NoContent();
+//        }
 
     }
 }
