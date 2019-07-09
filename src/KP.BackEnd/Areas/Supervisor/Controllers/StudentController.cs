@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using KP.BackEnd.Core;
-using KP.BackEnd.Core.DTOs.Supervisor.Student;
+using KP.BackEnd.Core.DTOs.Shared.Profile;
 using KP.BackEnd.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
