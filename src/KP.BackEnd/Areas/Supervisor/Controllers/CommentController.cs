@@ -9,28 +9,32 @@ using KP.BackEnd.Core.DTOs.Supervisor.Comment;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Persistence.EntityConfigurations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Supervisor")]
     [Route("api/supervisor/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
          
-        public CommentController(IUnitOfWork unitOfWork, IMapper mapper)
+        public CommentController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet("{studentId}/{date}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<CommentGetDto>>> GetAll(Guid studentId, DateTime date, int page, int count)
         {
-            var userId= ApplicationUserConfiguration.SupervisorIdTmp;
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var comments = await _unitOfWork.Comments.GetRange(userId ,studentId, date, page, count);
 
             var commentDtos = comments.Select(c => _mapper.Map<CommentGetDto>(c));
@@ -44,8 +48,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.SupervisorIdTmp;
-            
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var comment = _mapper.Map<Comment>(commentDto);
             comment.CreationTime = DateTime.Now;
             comment.SupervisorId = userId;

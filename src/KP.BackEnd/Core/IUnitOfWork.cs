@@ -7,6 +7,10 @@ namespace KP.BackEnd.Core
     {
         ICardRepository Cards { get; }
         ICommentRepository Comments { get; }
+        ISchoolClassRepository SchoolClasses { get; }
+        IChannelPostRepository ChannelPosts { get; }
+        IStudentRepository Students { get; }
+        ISupervisorRepository Supervisors { get; }
         Task Complete();
     }
 }

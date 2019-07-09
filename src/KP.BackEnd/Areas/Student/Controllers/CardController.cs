@@ -10,12 +10,13 @@ using KP.BackEnd.Core.DTOs.Student.Card;
 using KP.BackEnd.Core.Models;
 using KP.BackEnd.Persistence.EntityConfigurations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Student.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Student")]
     [Route("api/student/[controller]")]
     [ApiController]
     public class CardController : ControllerBase
@@ -23,17 +24,19 @@ namespace KP.BackEnd.Areas.Student.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CardController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public CardController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet("{date}/{range}")]
         public async Task<ActionResult<IEnumerable<CardGetDto>>> GetRangeByDate(string date, int range)
         {
-            // var userId = Guid.Parse(User.Identity.Name);
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(_userManager.GetUserId(User));
             var cards = await _unitOfWork.Cards.GetRange(userId, DateTime.Parse(date), range);
 
             var cardDtos = new List<CardGetDto>();
@@ -58,10 +61,11 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] CardPostDto cardDto)
         {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
             var card = _mapper.Map<Card>(cardDto);
             card.Status = CardStatus.Todo;
             card.StudentId = userId;
@@ -83,7 +87,8 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Edit(Guid id, CardPutDto cardPut)
         {
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found");
@@ -131,7 +136,8 @@ namespace KP.BackEnd.Areas.Student.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Remove(Guid id)
         {
-            var userId = ApplicationUserConfiguration.StudentIdTmp;
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
             var card = await _unitOfWork.Cards.Find(userId, id);
             if (card == null)
                 return NotFound("card not found!");
