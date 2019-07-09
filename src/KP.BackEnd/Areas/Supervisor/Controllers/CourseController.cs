@@ -56,5 +56,19 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var courseGetDto = _mapper.Map<CourseGetDto>(course);
             return Ok(courseGetDto);
         }
+
+        [HttpGet("student/{studentId}")]
+        public async Task<ActionResult<IEnumerable<CourseGetDto>>> GetAllCoursesOfStudent(Guid studentId)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            
+            var student = await _unitOfWork.Students.FindBySupervisor(userId, studentId);
+            if (student == null)
+                return BadRequest("StudentId is not valid");
+
+            var courses = _mapper.Map<IEnumerable<CourseGetDto>>(student.Courses);
+
+            return Ok(courses);
+        }
     }
 }
