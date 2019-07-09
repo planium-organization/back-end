@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using KP.BackEnd.Core;
@@ -83,6 +84,23 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var studentsDtos = _mapper.Map<IEnumerable<StudentGetDto>>(students);
             //TODO student's emails as username should be mapped also 
             return Ok(studentsDtos);
+        }
+
+        [HttpDelete("{classId}")]
+        public async Task<ActionResult> Delete(Guid classId)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            var supervisor = await _unitOfWork.Supervisors.Find(userId);
+
+            var sClass = supervisor.SchoolClasses.FirstOrDefault(s => s.Id == classId);
+            if (sClass == null)
+                return BadRequest("Class Id is not valid");
+
+            supervisor.SchoolClasses.Remove(sClass);
+
+            await _unitOfWork.Complete();
+
+            return Ok(sClass);
         }
     }
 }
