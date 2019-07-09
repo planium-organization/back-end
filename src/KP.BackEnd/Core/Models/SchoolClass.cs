@@ -12,6 +12,7 @@ namespace KP.BackEnd.Core.Models
         private string _schoolName;
         private ICollection<ChannelPost> _channelPosts;
         private string _token;
+        private SuggestedPlan _suggestedPlan;
 
         public Guid Id
         {
@@ -47,6 +48,12 @@ namespace KP.BackEnd.Core.Models
         {
             get => _token;
             set => _token = value;
+        }
+
+        public virtual SuggestedPlan SuggestedPlan
+        {
+            get => _suggestedPlan;
+            set => _suggestedPlan = value;
         }
     }
 }
