@@ -7,6 +7,7 @@ namespace KP.BackEnd.Core.Models
     {
         private string _firstName;
         private string _lastName;
+        private byte[] _image;
 
         public string FirstName
         {
@@ -18,6 +19,12 @@ namespace KP.BackEnd.Core.Models
         {
             get => _lastName;
             set => _lastName = value;
+        }
+
+        public byte[] Image
+        {
+            get => _image;
+            set => _image = value;
         }
 
         public ApplicationUser() {}

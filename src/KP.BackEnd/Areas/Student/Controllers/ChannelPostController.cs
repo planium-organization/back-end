@@ -49,7 +49,7 @@ namespace KP.BackEnd.Areas.Student.Controllers
             if (sClass == null)
                 return BadRequest("You have to join a class first");
             
-            var channelPosts = sClass.ChannelPosts.Skip(page).Take(count).ToList();
+            var channelPosts = sClass.ChannelPosts.Skip(page * count).Take(count).ToList();
             var channelPostGetDtos = _mapper.Map<IEnumerable<ChannelPostGetDto>>(channelPosts);
             
             return Ok(channelPostGetDtos);
