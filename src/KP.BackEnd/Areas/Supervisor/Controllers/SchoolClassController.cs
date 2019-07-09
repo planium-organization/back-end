@@ -61,6 +61,9 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             var userId = Guid.Parse(_userManager.GetUserId(User));
 
             var schoolClasses = await _unitOfWork.SchoolClasses.GetAll(userId);
+            if (schoolClasses == null)
+                return NotFound("No registered classes found for this supervisor");
+            
             var sClassesDtos = _mapper.Map<IEnumerable<SchoolClass>, IEnumerable<SchoolClassGetDto>>(schoolClasses);
             
             return Ok(sClassesDtos);
