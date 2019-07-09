@@ -69,5 +69,27 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             
             return CreatedAtAction(null, _mapper.Map<ChannelPostGetDto>(channelPost), null);
         }
+        
+        [HttpDelete("{classId}/{id}")]
+        public async Task<ActionResult> Remove(Guid schoolClassId, Guid id)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
+            var schoolClass = _unitOfWork.SchoolClasses.Find(userId, schoolClassId);
+            if (schoolClass == null)
+                return NotFound("SchoolClass not found!");
+            
+            //todo check whether the requested channelpost exists in this class
+            //todo return NotFound("SchoolClass not found in this school class!"); 
+            
+            var channelPost = await _unitOfWork.ChannelPosts.Find(id);
+            if (channelPost == null)
+                return NotFound("ChannelPost not found!");
+            
+            _unitOfWork.ChannelPosts.Remove(channelPost);
+            await _unitOfWork.Complete();
+            
+            return Ok();
+        }
     }
 }
