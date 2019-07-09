@@ -16,6 +16,7 @@ namespace KP.BackEnd.Persistence.Repositories
         {
             _context = context;
         }
+        
         public async Task<ChannelPost> Find(Guid id)
         {
             return await _context.ChannelPosts.FirstOrDefaultAsync(c => c.Id == id);
@@ -39,6 +40,11 @@ namespace KP.BackEnd.Persistence.Repositories
         public async Task Add(ChannelPost channelPost)
         {
             await _context.ChannelPosts.AddAsync(channelPost);
+        }
+        
+        public void Remove(ChannelPost channelPost)
+        {
+            _context.ChannelPosts.Remove(channelPost);
         }
     }
 }
