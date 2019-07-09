@@ -19,9 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\DTOs\Student" />
-    <Folder Include="Migrations" />
-  </ItemGroup>
-
 </Project>

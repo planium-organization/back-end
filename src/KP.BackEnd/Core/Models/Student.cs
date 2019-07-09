@@ -8,9 +8,9 @@ namespace KP.BackEnd.Core.Models
         private Guid _id;
         private ApplicationUser _identity;
         private string _major;
-        private string _schoolName;
-        private Guid _schoolClassId;
         private ICollection<Course> _courses;
+        private SchoolClass _schoolClass;
+        private ICollection<Card> _cards;
 
         public Guid Id {
             get => _id;
@@ -29,22 +29,22 @@ namespace KP.BackEnd.Core.Models
             set => _major = value;
         }
 
-        public string SchoolName 
+        public virtual SchoolClass SchoolClass
         {
-            get => _schoolName;
-            set => _schoolName = value;
-        }
-
-        public Guid SchoolClassId
-        {
-            get => _schoolClassId;
-            set => _schoolClassId = value;
+            get => _schoolClass;
+            set => _schoolClass = value;
         }
 
         public virtual ICollection<Course> Courses
         {
             get => _courses;
             set => _courses = value;
+        }
+
+        public virtual ICollection<Card> Cards
+        {
+            get => _cards;
+            set => _cards = value;
         }
 
 //        public Guid IdentityId { get; set; }

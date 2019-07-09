@@ -10,19 +10,22 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<SchoolClass> builder)
         {
-            //TODO
+            builder.HasIndex(sc => sc.Token);
+            
             builder.HasData(new SchoolClass
             {
                 Id = Guid.Parse("cccccccc-1111-1111-1111-111111111111"),
                 SupervisorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
-                Name = "Mathematics",
-                SchoolName = "SchoolName1"
+                Name = "101",
+                SchoolName = "Helli1",
+                Token = "123456"
             },new SchoolClass
             {
                 Id = Guid.Parse("cccccccc-1111-1111-1111-111111111112"),
                 SupervisorId = Guid.Parse("bbbb1111-1111-1111-1111-111111111111"),
-                Name = "Mathematics",
-                SchoolName = "SchoolName1"
+                Name = "202",
+                SchoolName = "Helli2",
+                Token = "134567"
             });
         }
     }

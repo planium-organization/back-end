@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KP.BackEnd.Areas.Supervisor.Controllers
 {
-    // [Authorize]
+    [Authorize(Roles = "Supervisor")]
     [Route("api/supervisor/[controller]")]
     [ApiController]
     public class ChannelPostController : ControllerBase
@@ -36,14 +36,21 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
 //            var userId = Guid.Parse(_userManager.GetUserId(User));
 //            
 //            var channelPost = await _unitOfWork.ChannelPosts.Find(userId,id);
-//            return Ok(_mapper.Map<ChannelPostGetDto>(channelPost)); // TODO
+//            return Ok(_mapper.Map<ChannelPostGetDto>(channelPost)); 
 //        }
 //        
-        [HttpGet("{page}/{count}")]
+        [HttpGet("{classId}/{page}/{count}")]
         public async Task<ActionResult<IEnumerable<ChannelPostGetDto>>> GetAll(Guid classId, int page, int count)
         {
-            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(classId, page, count);
-            var channelPostDtos = channelPosts.Select(cp => _mapper.Map<ChannelPostGetDto>(cp)); // TODO
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            
+            var schoolClass = _unitOfWork.SchoolClasses.Find(userId, classId);
+            if (schoolClass == null)
+                return NotFound("Class not found!!");//Todo badrequest not authorized!
+            
+            var channelPosts = await _unitOfWork.ChannelPosts.GetRange(userId, classId, page, count);
+            //var channelPosts=schoolClass.Channelpsots ,..........
+            var channelPostDtos = channelPosts.Select(cp => _mapper.Map<ChannelPostGetDto>(cp)); 
             return Ok(channelPostDtos);
         }
         
@@ -53,14 +60,36 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var userId = Guid.Parse(User.Identity.Name);
-            
-            var channelPost = _mapper.Map<ChannelPost>(dto); // TODO
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
+            var channelPost = _mapper.Map<ChannelPost>(dto);
             
             await _unitOfWork.ChannelPosts.Add(channelPost);
             await _unitOfWork.Complete();
             
             return CreatedAtAction(null, _mapper.Map<ChannelPostGetDto>(channelPost), null);
+        }
+        
+        [HttpDelete("{classId}/{id}")]
+        public async Task<ActionResult> Remove(Guid schoolClassId, Guid id)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+
+            var schoolClass = _unitOfWork.SchoolClasses.Find(userId, schoolClassId);
+            if (schoolClass == null)
+                return NotFound("SchoolClass not found!");
+            
+            //todo check whether the requested channelpost exists in this class
+            //todo return NotFound("SchoolClass not found in this school class!"); 
+            
+            var channelPost = await _unitOfWork.ChannelPosts.Find(id);
+            if (channelPost == null)
+                return NotFound("ChannelPost not found!");
+            
+            _unitOfWork.ChannelPosts.Remove(channelPost);
+            await _unitOfWork.Complete();
+            
+            return Ok();
         }
     }
 }

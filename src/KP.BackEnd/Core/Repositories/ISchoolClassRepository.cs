@@ -10,5 +10,6 @@ namespace KP.BackEnd.Core.Repositories
         Task<SchoolClass> Find(Guid userId, Guid id);
         Task Add(SchoolClass schoolClass);
         Task<IEnumerable<SchoolClass>> GetAll(Guid userId);
+        Task<SchoolClass> FindByToken(string token);
     }
 }
