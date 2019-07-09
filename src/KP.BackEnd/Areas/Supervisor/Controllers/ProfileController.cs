@@ -28,7 +28,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<StudentGetDto>> Get()
+        public async Task<ActionResult<SupervisorGetDto>> Get()
         {
             var userId = Guid.Parse(_userManager.GetUserId(User));
             var supervisor = await _unitOfWork.Supervisors.Find(userId);
@@ -57,7 +57,7 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
            
             await _unitOfWork.Complete();
 
-            return Ok(_mapper.Map<StudentGetDto>(supervisor));
+            return Ok(_mapper.Map<SupervisorGetDto>(supervisor));
         }
     }
 }
