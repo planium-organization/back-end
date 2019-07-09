@@ -8,6 +8,7 @@ namespace KP.BackEnd.Core.Models
         private Guid _id;
         private ApplicationUser _identity;
         private ICollection<Course> _courses;
+        private ICollection<SchoolClass> _schoolClasses;
 
         public Guid Id 
         {
@@ -27,6 +28,11 @@ namespace KP.BackEnd.Core.Models
             set => _courses = value;
         }
 
+        public ICollection<SchoolClass> SchoolClasses
+        {
+            get => _schoolClasses;
+            set => _schoolClasses = value;
+        }
 //        public Guid IdentityId { get; set; }
 //        public ICollection<SchClass> SchClasses { get; set; }
     }
