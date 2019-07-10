@@ -63,8 +63,21 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             return Ok(_mapper.Map<SuggestedPlanGetDto>(plan));
         }
 
-        
-        
+        [HttpDelete("{classId}")]
+        public async Task<ActionResult> Remove(Guid classId)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            var supervisor = await _unitOfWork.Supervisors.Find(userId);
+
+            var sClass = supervisor.SchoolClasses.FirstOrDefault(c => c.Id == classId);
+            if (sClass == null)
+                return BadRequest("Class Id is not valid");
+            
+            sClass.SuggestedPlan.Cards.Clear();
+            await _unitOfWork.Complete();
+            
+            return Ok();
+        }
         
         [HttpPut("{classId}/{cardId}")]
         public async Task<ActionResult> EditCard(Guid classId, Guid cardId,[FromBody] CardPutDto cardPut)
