@@ -16,6 +16,7 @@ namespace KP.BackEnd.Persistence
         private DbSet<ChannelPost> _channelPosts;
         private DbSet<Student> _students;
         private DbSet<Supervisor> _supervisors;
+        private DbSet<SuggestedPlan> _suggestedPlans;
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -78,6 +79,12 @@ namespace KP.BackEnd.Persistence
         {
             get => _supervisors;
             set => _supervisors = value;
+        }
+
+        public DbSet<SuggestedPlan> SuggestedPlans
+        {
+            get => _suggestedPlans;
+            set => _suggestedPlans = value;
         }
     }
 }
