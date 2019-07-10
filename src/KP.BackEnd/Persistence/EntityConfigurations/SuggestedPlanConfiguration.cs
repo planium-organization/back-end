@@ -9,7 +9,8 @@ namespace KP.BackEnd.Persistence.EntityConfigurations
         public void Configure(EntityTypeBuilder<SuggestedPlan> builder)
         {
             builder.HasOne(sp => sp.SchoolClass)
-                .WithOne(sc => sc.SuggestedPlan);
+                .WithOne(sc => sc.SuggestedPlan)
+                .HasForeignKey<SuggestedPlan>(sp => sp.SuggestedPlanId);
         }
     }
 }

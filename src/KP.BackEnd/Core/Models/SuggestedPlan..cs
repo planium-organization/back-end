@@ -8,6 +8,13 @@ namespace KP.BackEnd.Core.Models
         private SchoolClass _schoolClass;
         private Guid _id;
         private ICollection<Card> _cards;
+        private Guid _suggestedPlanId;
+
+        public Guid SuggestedPlanId
+        {
+            get => _suggestedPlanId;
+            set => _suggestedPlanId = value;
+        }
 
         public Guid Id
         {
