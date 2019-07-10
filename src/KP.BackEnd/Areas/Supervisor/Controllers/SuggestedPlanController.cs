@@ -118,6 +118,24 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             return Ok(cardGetDto);
         }
         
-       
+        [HttpDelete("{classId}/{cardId}")]
+        public async Task<ActionResult> Remove(Guid classId, Guid cardId)
+        {
+            var userId = Guid.Parse(_userManager.GetUserId(User));
+            var supervisor = await _unitOfWork.Supervisors.Find(userId);
+
+            var sClass = supervisor.SchoolClasses.FirstOrDefault(c => c.Id == classId);
+            if (sClass == null)
+                return BadRequest("Class Id is not valid");
+
+            var card = sClass.SuggestedPlan.Cards.FirstOrDefault(c=>c.Id == cardId);
+            if (card == null)
+                return NotFound("card not found");
+            
+            sClass.SuggestedPlan.Cards.Remove(card);
+            await _unitOfWork.Complete();
+            
+            return Ok();
+        }
     }
 }
