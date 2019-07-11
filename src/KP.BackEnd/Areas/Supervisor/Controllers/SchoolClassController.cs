@@ -80,9 +80,8 @@ namespace KP.BackEnd.Areas.Supervisor.Controllers
             if(schoolClass == null)
                 return NotFound("Class not found");
 
-            var students = _unitOfWork.Students.FindAll(classId);
+            var students = await _unitOfWork.Students.FindAll(classId);
             var studentsDtos = _mapper.Map<IEnumerable<StudentGetDto>>(students);
-            //TODO student's emails as username should be mapped also 
             return Ok(studentsDtos);
         }
 
