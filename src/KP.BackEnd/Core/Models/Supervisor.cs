@@ -28,7 +28,7 @@ namespace KP.BackEnd.Core.Models
             set => _courses = value;
         }
 
-        public ICollection<SchoolClass> SchoolClasses
+        public virtual ICollection<SchoolClass> SchoolClasses
         {
             get => _schoolClasses;
             set => _schoolClasses = value;
