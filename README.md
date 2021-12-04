@@ -1,6 +1,13 @@
 # Back-End of the project "Planium"
 [![Build Status](https://dev.azure.com/known-project/back-end/_apis/build/status/back-end-ASP.NET%20Core-CI?branchName=master)](https://dev.azure.com/known-project/back-end/_build/latest?definitionId=2&branchName=master)
 
+## What we've done
+
+- Implemented the back-end REST API of the project using ASP.NET Core framework.
+- Used PostgreSQL and Entity Framework for data persistence.
+- Leveraged the MVC pattern for code structuring.
+- Collaborated in a team of 5 under Scrum methodology.
+
 ## Prerequisites
 
 ### ASP.NET Core
